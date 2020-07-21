@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>519</width>
+    <height>320</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -83,7 +83,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>400</width>
+     <width>519</width>
      <height>25</height>
     </rect>
    </property>
@@ -98,6 +98,7 @@
    <addaction name="actionLoadImage"/>
    <addaction name="actionGenCodeArray"/>
    <addaction name="actionloadBinFile"/>
+   <addaction name="actionTextToImage"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionLoadImage">
@@ -113,6 +114,11 @@
   <action name="actionloadBinFile">
    <property name="text">
     <string>loadBinFile</string>
+   </property>
+  </action>
+  <action name="actionTextToImage">
+   <property name="text">
+    <string>TextToImage</string>
    </property>
   </action>
  </widget>

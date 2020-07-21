@@ -27,14 +27,17 @@ CONFIG += c++11
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    imagedata.cpp
+    imagedata.cpp \
+    dialogtexttoimage.cpp
 
 HEADERS += \
         mainwindow.h \
-    imagedata.h
+    imagedata.h \
+    dialogtexttoimage.h
 
 FORMS += \
-        mainwindow.ui
+        mainwindow.ui \
+    dialogtexttoimage.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

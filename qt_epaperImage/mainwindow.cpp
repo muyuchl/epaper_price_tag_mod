@@ -6,6 +6,7 @@
 #include <QTextStream>
 
 #include "imagedata.h"
+#include "dialogtexttoimage.h"
 
 #include <QDebug>
 #include <QColor>
@@ -272,4 +273,10 @@ void MainWindow::on_actionloadBinFile_triggered()
     }
 
 
+}
+
+void MainWindow::on_actionTextToImage_triggered()
+{
+    DialogTextToImage dlg;
+    dlg.exec();
 }

@@ -9,6 +9,7 @@ namespace Ui {
 class MainWindow;
 }
 
+
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -26,6 +27,8 @@ private slots:
     void on_actionGenCodeArray_triggered();
 
     void on_actionloadBinFile_triggered();
+
+    void on_actionTextToImage_triggered();
 
 private:
     void genHorizontal(const unsigned char *img);
