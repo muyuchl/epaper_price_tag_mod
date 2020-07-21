@@ -1,6 +1,6 @@
 #include <MSP430G2553.h>
 #include "epd.h"
-#include "imagedata.h"
+//#include "imagedata.h"
 
 static void sendbyte(int sdbyte);
 static void epd_send_cmd(int cmd);
@@ -11,7 +11,7 @@ static void Delaylong(unsigned int n10Count);
 const unsigned char epdinit[];
 
 
-
+/*
 static void fill_predefinedimage()
 {
   // set ram x address counter
@@ -31,6 +31,7 @@ static void fill_predefinedimage()
     // Master Activation
     epd_send_cmd(0x20);    
 }
+*/
 
 void epd_init()
 {

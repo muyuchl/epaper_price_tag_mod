@@ -26,6 +26,10 @@ case RFCMD_FLASH_SECTOR_ERASE:
       handle_sector_erase(buf);
       break;
 
+      case RFCMD_FLASH_CHIP_ERASE:
+      handle_chip_erase(buf);
+      break;
+
       case RFCMD_WRITE_FLASH_DATA:
       handle_flash_write(buf);
       break;
@@ -86,6 +90,18 @@ uint32_t addr = ((uint32_t)(buf[1]) << 16) + ((uint32_t)(buf[2]) << 8) +
   flash_sector_erase(addr);
 
 a7105_tx_data(buf, RF_FRAME_LEN);
+}
+
+void handle_chip_erase(unsigned char *buf)
+{
+buf[0] = RFCMD_FLASH_CHIP_ERASE_RESP;
+
+
+
+  flash_chip_erase();
+
+a7105_tx_data(buf, RF_FRAME_LEN);
+
 }
 
 void handle_flash_write(unsigned char *buf)

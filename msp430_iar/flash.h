@@ -25,6 +25,7 @@ void flash_read_id(uint8_t *buf);
 void flash_read_data(uint8_t *buf, uint32_t addr, uint16_t len);
 
 void flash_sector_erase(uint32_t addr);
+void flash_chip_erase();
 
 void flash_write_data(uint32_t addr, uint8_t *buf, uint16_t len);
 

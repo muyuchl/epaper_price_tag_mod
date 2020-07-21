@@ -47,6 +47,7 @@ uart_send_str(__TIME__);
 uart_send_str("\r\n");
 */
 
+delay_ms(40);
 epd_init();
 
 // rf on off pin
@@ -78,7 +79,7 @@ flash_init();
 
       // back to rx mode
     	a7105_toRxMode();
-        delay_ms(100);
+       // delay_ms(100);
     }
   }
 
