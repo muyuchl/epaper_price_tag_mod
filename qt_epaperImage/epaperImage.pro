@@ -28,16 +28,19 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     imagedata.cpp \
-    dialogtexttoimage.cpp
+    dialogtexttoimage.cpp \
+    dialogmergebins.cpp
 
 HEADERS += \
         mainwindow.h \
     imagedata.h \
-    dialogtexttoimage.h
+    dialogtexttoimage.h \
+    dialogmergebins.h
 
 FORMS += \
         mainwindow.ui \
-    dialogtexttoimage.ui
+    dialogtexttoimage.ui \
+    dialogmergebins.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

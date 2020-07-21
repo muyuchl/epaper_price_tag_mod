@@ -30,6 +30,8 @@ private slots:
 
     void on_actionTextToImage_triggered();
 
+    void on_actionmergeBins_triggered();
+
 private:
     void genHorizontal(const unsigned char *img);
 

@@ -12,6 +12,7 @@
 #include <QColor>
 #include <QFileDialog>
 #include <QMessageBox>
+#include "dialogmergebins.h"
 
 const int IMG_WIDTH = 128;
 const int IMG_HEIGHT = 250;
@@ -278,5 +279,11 @@ void MainWindow::on_actionloadBinFile_triggered()
 void MainWindow::on_actionTextToImage_triggered()
 {
     DialogTextToImage dlg;
+    dlg.exec();
+}
+
+void MainWindow::on_actionmergeBins_triggered()
+{
+    DialogMergeBins dlg;
     dlg.exec();
 }

@@ -87,6 +87,13 @@
      <height>25</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuTools">
+    <property name="title">
+     <string>Tools</string>
+    </property>
+    <addaction name="actionmergeBins"/>
+   </widget>
+   <addaction name="menuTools"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -119,6 +126,11 @@
   <action name="actionTextToImage">
    <property name="text">
     <string>TextToImage</string>
+   </property>
+  </action>
+  <action name="actionmergeBins">
+   <property name="text">
+    <string>mergeBins</string>
    </property>
   </action>
  </widget>
