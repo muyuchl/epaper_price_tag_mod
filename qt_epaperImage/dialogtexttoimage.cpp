@@ -46,9 +46,10 @@ void DialogTextToImage::on_pushButtonPreview_clicked()
 
     QPainter painter(&preViewImage);
 
-    QFont font = ui->fontComboBox->font();
+    QFont font = ui->fontComboBox->currentFont();
     font.setPixelSize(ui->spinBoxFontSize->value());
 
+    qDebug() << "font family" << font.family();
     painter.setFont(font);
 
 
