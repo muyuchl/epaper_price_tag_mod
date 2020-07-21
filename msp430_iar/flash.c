@@ -12,6 +12,8 @@
 #define CMD_WRITE_ENABLE 0x06
 #define CMD_SECTOR_ERASE 0x20
 
+#define CMD_CHIP_ERASE 0xC7
+
 #define FLASH_BUSY_FLAG 0x01
 
 #ifdef PRICETAG_DEVICE
@@ -238,6 +240,28 @@ void flash_sector_erase(uint32_t addr)
 	for (int i = 0; i < 4; i++) {
 		flash_send_byte(txbuf[i]);
 	}
+	
+
+	CS_1;
+
+	wait_until_not_busy();
+}
+
+void flash_chip_erase()
+{
+flash_write_enable();
+	wait_until_not_busy();
+
+	uint8_t txbuf[4]  = {0};
+
+	CS_0;
+
+	txbuf[0] = CMD_CHIP_ERASE;
+	
+
+	
+	flash_send_byte(txbuf[0]);
+	
 	
 
 	CS_1;

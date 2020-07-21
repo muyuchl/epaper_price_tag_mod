@@ -43,6 +43,10 @@ enum {
     RFCMD_LOAD_IMAGE_FROM_FLASH = 0x0C,
     // 3 byte address (MSB first)
     RFCMD_LOAD_IMAGE_FROM_FLASH_RESP = 0x0D,
+
+
+    RFCMD_FLASH_CHIP_ERASE = 0x14,
+    RFCMD_FLASH_CHIP_ERASE_RESP = 0x15,
 };
 
 void check_and_handle_rf_command();
@@ -52,6 +56,8 @@ void handle_flash_jedecid();
 void handle_flash_read(unsigned char *buf);
 
 void handle_sector_erase(unsigned char *buf);
+void handle_chip_erase(unsigned char *buf);
+
 void handle_flash_write(unsigned char *buf);
 
 

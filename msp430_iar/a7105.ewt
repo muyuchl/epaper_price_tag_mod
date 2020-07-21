@@ -2175,12 +2175,6 @@
         <name>$PROJ_DIR$\flash.h</name>
     </file>
     <file>
-        <name>$PROJ_DIR$\imagedata.c</name>
-    </file>
-    <file>
-        <name>$PROJ_DIR$\imagedata.h</name>
-    </file>
-    <file>
         <name>$PROJ_DIR$\main.c</name>
     </file>
     <file>
