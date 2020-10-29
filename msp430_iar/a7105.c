@@ -337,6 +337,7 @@ delay_us(10);
 	    
 	    while (A7105_BUSY && count < 100)
 	    {
+              count++;
 	        delay_us(1000);
 	    }
 }
