@@ -172,7 +172,6 @@ void a7105_strobe_cmd(uint8_t cmd);
 uint8_t a7105_gio2_low();
 uint8_t a7105_rx_crc_ok();
 
-
 void a7105_read_rxdata(uint8_t *data, int len);
 
 void a7105_tx_data(uint8_t *data, int len);

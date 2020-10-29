@@ -11,10 +11,13 @@
 #define rfoff              P2OUT |= 0x80
 
 int count = 0;
+int crcErrCount = 0;
 
 volatile unsigned char cmd = 0;
 
 uint8_t write_flash_buf[8];
+
+uint8_t buf[RF_FRAME_LEN];
 
 void delay_ms(int count)
 {
@@ -72,15 +75,24 @@ flash_init();
     }
     */
    
-    if (a7105_gio2_low() 
-      	&& a7105_rx_crc_ok()) {
-        
-        check_and_handle_rf_command();
+    if (a7105_gio2_low() ) {
 
-      // back to rx mode
+    	if (a7105_rx_crc_ok()) {
+    		check_and_handle_rf_command();
+    	} else {
+    		crcErrCount++;
+    		delay_ms(100);
+    		// read to discard
+    		a7105_read_rxdata(buf, RF_FRAME_LEN);
+    		delay_ms(10);
+    		a7105_strobe_cmd(CMD_STBY);
+    		delay_ms(10);
+    	}
+
+    	// back to rx mode
     	a7105_toRxMode();
-       // delay_ms(100);
-    }
+    } 
+      
   }
 
  // return 0;

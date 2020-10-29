@@ -322,18 +322,22 @@ void a7105_read_rxdata(uint8_t *data, int len)
 
 void a7105_tx_data(uint8_t *data, int len)
 {
+	int count = 0;
 a7105_strobe_cmd(CMD_STBY);
+delay_us(10);
 
 	    a7105_writefifo(data, len);
+delay_us(10);
 
 	    a7105_set_ch(RF_CHANNEL);
+delay_us(10);
 
 	    a7105_strobe_cmd(CMD_TX);
-
+delay_us(10);
 	    
-	    while (A7105_BUSY)
+	    while (A7105_BUSY && count < 100)
 	    {
-	        ;
+	        delay_us(1000);
 	    }
 }
 
