@@ -75,7 +75,7 @@ void UartHandler::unInit()
 // one byte command id and following command data
 void UartHandler::sltSendFrame(const QByteArray &frame)
 {
-    qDebug() << __FUNCTION__;
+    //qDebug() << __FUNCTION__;
 
     Q_ASSERT(frame.size() <= MAX_FRAME_LEN);
 
@@ -113,7 +113,7 @@ void UartHandler::sltSendFrame(const QByteArray &frame)
 
 void UartHandler::sltParseFrame()
 {
-    qDebug() << __FUNCTION__;
+    //qDebug() << __FUNCTION__;
     if (serialPort->bytesAvailable() >= 5)
     {
         char buf[3];
