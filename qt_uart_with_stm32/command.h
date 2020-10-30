@@ -20,6 +20,7 @@ enum
     CMD_RF_TXDATA = 0x32,
     // initialed by MCU, when received RF data
     CMD_RF_DATARECEIVED = 0x33,
+    CMD_RF_READ_ID = 0x34,
 
     // read jedec id,
     // response:

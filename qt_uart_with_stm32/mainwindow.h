@@ -10,6 +10,9 @@
 #include "forma7105.h"
 #include "formepaperimage.h"
 
+#include "a7105pingtest.h"
+#include "a7105uploader.h"
+
 namespace Ui {
 class MainWindow;
 }
@@ -17,6 +20,10 @@ class MainWindow;
 class UartHandler;
 
 class QLabel;
+
+class A7105PingTest;
+class FormA7105PingTest;
+class FormA7105Uploader;
 
 class MainWindow : public QMainWindow
 {
@@ -29,33 +36,11 @@ public:
 private slots:
     void sltStatisticChanged(int tx, int rx);
 
-//    void sltFrameReceived(QByteArray frame);
-//    void sltStopRTTTest();
-//    void on_pushButtonInit_clicked();
-//    void on_pushButtonUnInit_clicked();
-//    void on_pushButtonPing_clicked();
-//    void on_pushButtonRTTTest_clicked();
-
-
-//    void on_pushButtonLedOn_clicked();
-
-//    void on_pushButtonLedOff_clicked();
-
-//    void on_pushButtonWrite_clicked();
-
-//    void on_pushButtonRead_clicked();
-
-//    void on_pushButtonRFTest_clicked();
-
-//    void on_pushButtonRfTx_clicked();
 
     void on_actionPortConfig_triggered();
 
 private:
     void init();
-//    void sendPing(int count);
-//    void handleEEPROMRead(const QByteArray &frame);
-//    void handleRxRFData(const QByteArray &frame);
 
 
 private:
@@ -70,14 +55,17 @@ private:
     FormA7105 *formA7105;
     FormEpaperImage *formEpaper;
 
+    FormA7105PingTest *formA7105PingTest;
+    FormA7105Uploader *formA7105Upploader;
+
     DialogPortConfig *dialogPortConfig;
 
     UartHandler *uartHandler;
     QString portName;
 
+    A7105PingTest *a7105PingTest;
+    A7105Uploader *a7105Upploader;
 
-//    bool rttTesting;
-//    qint32 rttCount;
 };
 
 #endif // MAINWINDOW_H

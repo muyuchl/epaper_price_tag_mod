@@ -11,7 +11,8 @@
 #include <QDateTime>
 #include <QLabel>
 
-//const int RTT_TEST_DURATION = 10*1000;  // 10s
+#include "forma7105pingtest.h"
+#include "forma7105uploader.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -24,15 +25,26 @@ MainWindow::MainWindow(QWidget *parent) :
     formSpiFlash(new FormSPIFlash()),
     formA7105(new FormA7105()),
     formEpaper(new FormEpaperImage()),
-    dialogPortConfig(new DialogPortConfig(this))
+    formA7105PingTest(new FormA7105PingTest()),
+    formA7105Upploader(new FormA7105Uploader()),
+    dialogPortConfig(new DialogPortConfig(this)),
+    a7105PingTest(new A7105PingTest()),
+    a7105Upploader(new A7105Uploader())
 {
     ui->setupUi(this);
 
     ui->tabWidget->addTab(formTraffic, "Traffic");
     ui->tabWidget->addTab(formLed, "Led");
-    ui->tabWidget->addTab(formSpiFlash, "SPI Flash");
-    ui->tabWidget->addTab(formA7105, "A7105");
-    ui->tabWidget->addTab(formEpaper, "Epaper");
+
+    // ui->tabWidget->addTab(formSpiFlash, "SPI Flash");
+   // ui->tabWidget->addTab(formA7105, "A7105");
+   // ui->tabWidget->addTab(formEpaper, "Epaper");
+
+    ui->tabWidget->addTab(formA7105PingTest, "A7105 Ping Test");
+    formA7105PingTest->setA7105PingTest(a7105PingTest);
+
+    ui->tabWidget->addTab(formA7105Upploader, "A7105 Uploader");
+    formA7105Upploader->setUploader(a7105Upploader);
 
     statusBar()->addWidget(labelStatusPortName);
     statusBar()->addWidget(labelStatusPortError);
@@ -92,17 +104,27 @@ void MainWindow::init()
             uartHandler, &UartHandler::sltSendFrame);
 
     connect(uartHandler, &UartHandler::sgnFrameReceived,
-            formSpiFlash, &FormSPIFlash::sltFrameReceived);
-    connect(formSpiFlash, &FormSPIFlash::sgnSendFrame,
+            a7105PingTest, &A7105PingTest::sltFrameReceived);
+    connect(a7105PingTest, &A7105PingTest::sgnSendFrame,
             uartHandler, &UartHandler::sltSendFrame);
 
     connect(uartHandler, &UartHandler::sgnFrameReceived,
-            formA7105, &FormA7105::sltFrameReceived);
-    connect(formA7105, &FormA7105::sgnSendFrame,
+            a7105Upploader, &A7105Uploader::sltFrameReceived);
+    connect(a7105Upploader, &A7105Uploader::sgnSendFrame,
             uartHandler, &UartHandler::sltSendFrame);
 
-    connect(uartHandler, &UartHandler::sgnFrameReceived,
-            formEpaper, &FormEpaperImage::sltFrameReceived);
-    connect(formEpaper, &FormEpaperImage::sgnSendFrame,
-            uartHandler, &UartHandler::sltSendFrame);
+//    connect(uartHandler, &UartHandler::sgnFrameReceived,
+//            formSpiFlash, &FormSPIFlash::sltFrameReceived);
+//    connect(formSpiFlash, &FormSPIFlash::sgnSendFrame,
+//            uartHandler, &UartHandler::sltSendFrame);
+
+//    connect(uartHandler, &UartHandler::sgnFrameReceived,
+//            formA7105, &FormA7105::sltFrameReceived);
+//    connect(formA7105, &FormA7105::sgnSendFrame,
+//            uartHandler, &UartHandler::sltSendFrame);
+
+//    connect(uartHandler, &UartHandler::sgnFrameReceived,
+//            formEpaper, &FormEpaperImage::sltFrameReceived);
+//    connect(formEpaper, &FormEpaperImage::sgnSendFrame,
+//            uartHandler, &UartHandler::sltSendFrame);
 }

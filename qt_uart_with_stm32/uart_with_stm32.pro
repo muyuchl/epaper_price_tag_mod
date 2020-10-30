@@ -33,7 +33,11 @@ SOURCES += \
     formspiflash.cpp \
     formtraffic.cpp \
     forma7105.cpp \
-    formepaperimage.cpp
+    formepaperimage.cpp \
+    a7105pingtest.cpp \
+    forma7105pingtest.cpp \
+    a7105uploader.cpp \
+    forma7105uploader.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -44,7 +48,11 @@ HEADERS += \
     formspiflash.h \
     formtraffic.h \
     forma7105.h \
-    formepaperimage.h
+    formepaperimage.h \
+    a7105pingtest.h \
+    forma7105pingtest.h \
+    a7105uploader.h \
+    forma7105uploader.h
 
 FORMS += \
         mainwindow.ui \
@@ -53,7 +61,9 @@ FORMS += \
     formspiflash.ui \
     formtraffic.ui \
     forma7105.ui \
-    formepaperimage.ui
+    formepaperimage.ui \
+    forma7105pingtest.ui \
+    forma7105uploader.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
