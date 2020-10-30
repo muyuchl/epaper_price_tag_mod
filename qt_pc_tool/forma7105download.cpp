@@ -58,6 +58,9 @@ void FormA7105Download::on_pushButtonBrowse_clicked()
     if (f.open(QIODevice::ReadOnly)) {
         baData = f.readAll();
         qDebug() << "file loaded, size: " << baData.size();
+
+        ui->pushButtonDownload->setEnabled(true);
+        ui->labelPreview->setEpaperBinData(baData);
     }
 }
 

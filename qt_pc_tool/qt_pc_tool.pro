@@ -36,7 +36,8 @@ SOURCES += \
     a7105uploader.cpp \
     forma7105uploader.cpp \
     a7105downloader.cpp \
-    forma7105download.cpp
+    forma7105download.cpp \
+    monoimagelabel.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -50,7 +51,8 @@ HEADERS += \
     a7105uploader.h \
     forma7105uploader.h \
     a7105downloader.h \
-    forma7105download.h
+    forma7105download.h \
+    monoimagelabel.h
 
 FORMS += \
         mainwindow.ui \

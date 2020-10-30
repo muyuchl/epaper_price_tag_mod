@@ -32,6 +32,8 @@ void FormA7105Uploader::setUploader(A7105Uploader *a7105Uploader)
 void FormA7105Uploader::on_pushButtonUpload_clicked()
 {
     Q_ASSERT(uploader);
+    ui->labelPreview->hide();
+
     pingTime.start();
     uploader->start(ui->spinBoxImageIndex->value());
 }
@@ -49,6 +51,8 @@ void FormA7105Uploader::sltProgressChange(int progress)
     if (100 == progress) {
         QString strElapsed = QString("elapsed %1 ms").arg(pingTime.elapsed());
         ui->labelPingTestStatus->setText(strElapsed);
+        ui->labelPreview->setEpaperBinData(uploader->getBinData());
+        ui->labelPreview->show();
     }
 }
 

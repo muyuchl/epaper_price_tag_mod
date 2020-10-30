@@ -164,7 +164,7 @@ void A7105Uploader::parseReadDataResponse(const QByteArray &frame)
         return;
     }
 
-    QByteArray data = frame.mid(2, readLen);
+    QByteArray data = frame.mid(7, readLen);
     //qDebug() << "read data: " << QString(data.toHex(' '));
 
     bin.append(data);
