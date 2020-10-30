@@ -8,7 +8,7 @@ QT       += core gui serialport
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = uart_protocol
+TARGET = qt_pc_tool
 TEMPLATE = app
 
 # The following define makes your compiler emit warnings if you use
@@ -30,10 +30,7 @@ SOURCES += \
     uarthandler.cpp \
     dialogportconfig.cpp \
     formled.cpp \
-    formspiflash.cpp \
     formtraffic.cpp \
-    forma7105.cpp \
-    formepaperimage.cpp \
     a7105pingtest.cpp \
     forma7105pingtest.cpp \
     a7105uploader.cpp \
@@ -45,10 +42,7 @@ HEADERS += \
     command.h \
     dialogportconfig.h \
     formled.h \
-    formspiflash.h \
     formtraffic.h \
-    forma7105.h \
-    formepaperimage.h \
     a7105pingtest.h \
     forma7105pingtest.h \
     a7105uploader.h \

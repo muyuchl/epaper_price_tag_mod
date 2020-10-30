@@ -22,9 +22,6 @@ MainWindow::MainWindow(QWidget *parent) :
     labelStatusPortStatistic(new QLabel("")),
     formTraffic(new FormTraffic()),
     formLed(new FormLed()),
-    formSpiFlash(new FormSPIFlash()),
-    formA7105(new FormA7105()),
-    formEpaper(new FormEpaperImage()),
     formA7105PingTest(new FormA7105PingTest()),
     formA7105Upploader(new FormA7105Uploader()),
     dialogPortConfig(new DialogPortConfig(this)),
@@ -35,10 +32,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->tabWidget->addTab(formTraffic, "Traffic");
     ui->tabWidget->addTab(formLed, "Led");
-
-    // ui->tabWidget->addTab(formSpiFlash, "SPI Flash");
-   // ui->tabWidget->addTab(formA7105, "A7105");
-   // ui->tabWidget->addTab(formEpaper, "Epaper");
 
     ui->tabWidget->addTab(formA7105PingTest, "A7105 Ping Test");
     formA7105PingTest->setA7105PingTest(a7105PingTest);
@@ -70,7 +63,6 @@ void MainWindow::sltStatisticChanged(int tx, int rx)
     labelStatusPortStatistic->setText(QString("tx: %1  rx: %2")
                                       .arg(tx).arg(rx));
 }
-
 
 void MainWindow::on_actionPortConfig_triggered()
 {
@@ -113,18 +105,4 @@ void MainWindow::init()
     connect(a7105Upploader, &A7105Uploader::sgnSendFrame,
             uartHandler, &UartHandler::sltSendFrame);
 
-//    connect(uartHandler, &UartHandler::sgnFrameReceived,
-//            formSpiFlash, &FormSPIFlash::sltFrameReceived);
-//    connect(formSpiFlash, &FormSPIFlash::sgnSendFrame,
-//            uartHandler, &UartHandler::sltSendFrame);
-
-//    connect(uartHandler, &UartHandler::sgnFrameReceived,
-//            formA7105, &FormA7105::sltFrameReceived);
-//    connect(formA7105, &FormA7105::sgnSendFrame,
-//            uartHandler, &UartHandler::sltSendFrame);
-
-//    connect(uartHandler, &UartHandler::sgnFrameReceived,
-//            formEpaper, &FormEpaperImage::sltFrameReceived);
-//    connect(formEpaper, &FormEpaperImage::sgnSendFrame,
-//            uartHandler, &UartHandler::sltSendFrame);
 }

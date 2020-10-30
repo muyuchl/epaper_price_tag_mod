@@ -4,11 +4,7 @@
 #include <QMainWindow>
 #include "dialogportconfig.h"
 #include "formled.h"
-#include "formspiflash.h"
 #include "formtraffic.h"
-
-#include "forma7105.h"
-#include "formepaperimage.h"
 
 #include "a7105pingtest.h"
 #include "a7105uploader.h"
@@ -51,9 +47,6 @@ private:
 
     FormTraffic *formTraffic;
     FormLed *formLed;
-    FormSPIFlash *formSpiFlash;
-    FormA7105 *formA7105;
-    FormEpaperImage *formEpaper;
 
     FormA7105PingTest *formA7105PingTest;
     FormA7105Uploader *formA7105Upploader;
