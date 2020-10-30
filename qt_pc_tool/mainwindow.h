@@ -22,6 +22,7 @@ class A7105PingTest;
 class FormA7105PingTest;
 class FormA7105Uploader;
 class FormA7105Download;
+class FormTest;
 
 class MainWindow : public QMainWindow
 {
@@ -53,6 +54,7 @@ private:
     FormA7105PingTest *formA7105PingTest;
     FormA7105Uploader *formA7105Upploader;
     FormA7105Download *formA7105Download;
+    FormTest *formTest;
 
     DialogPortConfig *dialogPortConfig;
 

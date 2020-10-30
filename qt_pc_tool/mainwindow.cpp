@@ -14,6 +14,7 @@
 #include "forma7105pingtest.h"
 #include "forma7105uploader.h"
 #include "forma7105download.h"
+#include "formtest.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -26,6 +27,7 @@ MainWindow::MainWindow(QWidget *parent) :
     formA7105PingTest(new FormA7105PingTest()),
     formA7105Upploader(new FormA7105Uploader()),
     formA7105Download(new FormA7105Download()),
+    formTest(new FormTest()),
     dialogPortConfig(new DialogPortConfig(this)),
     a7105PingTest(new A7105PingTest()),
     a7105Upploader(new A7105Uploader()),
@@ -44,6 +46,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->tabWidget->addTab(formA7105Download, "A7105 Download");
     formA7105Download->setDownloader(a7105Downloader);
+
+    ui->tabWidget->addTab(formTest, "Test");
 
     statusBar()->addWidget(labelStatusPortName);
     statusBar()->addWidget(labelStatusPortError);
@@ -116,4 +120,6 @@ void MainWindow::init()
     connect(a7105Downloader, &A7105Downloader::sgnSendFrame,
             uartHandler, &UartHandler::sltSendFrame);
 
+    connect(formTest, &FormTest::sgnSendFrame,
+            uartHandler, &UartHandler::sltSendFrame);
 }

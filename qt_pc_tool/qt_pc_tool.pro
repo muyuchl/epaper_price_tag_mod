@@ -37,7 +37,8 @@ SOURCES += \
     forma7105uploader.cpp \
     a7105downloader.cpp \
     forma7105download.cpp \
-    monoimagelabel.cpp
+    monoimagelabel.cpp \
+    formtest.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -52,7 +53,8 @@ HEADERS += \
     forma7105uploader.h \
     a7105downloader.h \
     forma7105download.h \
-    monoimagelabel.h
+    monoimagelabel.h \
+    formtest.h
 
 FORMS += \
         mainwindow.ui \
@@ -64,7 +66,8 @@ FORMS += \
     formepaperimage.ui \
     forma7105pingtest.ui \
     forma7105uploader.ui \
-    forma7105download.ui
+    forma7105download.ui \
+    formtest.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
