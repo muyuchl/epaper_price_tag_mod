@@ -75,7 +75,7 @@
     </widget>
    </item>
    <item>
-    <widget class="QLabel" name="labelPingTestStatus">
+    <widget class="QLabel" name="labelStatus">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
        <horstretch>0</horstretch>

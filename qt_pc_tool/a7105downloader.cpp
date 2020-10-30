@@ -12,7 +12,8 @@ const int FLASH_IMAGE_SIZE = 4096;
 // data to read for one packet, should be fit in wireless packet
 const int FLASH_ONE_WRITE_SIZE = 48;
 
-const int RESPONSE_TIMEOUT = 1000;
+const int RESPONSE_TIMEOUT_ERASE = 10000;
+const int RESPONSE_TIMEOUT_WRITE = 1000;
 static const int RETRY_MAX = 3;
 }
 
@@ -27,7 +28,7 @@ A7105Downloader::A7105Downloader(QObject *parent) : QObject(parent),
     retryLeft(RETRY_MAX),
     statTimeoutCount(0)
 {
-    responseTimer->setInterval(RESPONSE_TIMEOUT);
+
     responseTimer->setSingleShot(true);
     connect(responseTimer, &QTimer::timeout,
             this, &A7105Downloader::sltTimeout);
@@ -59,7 +60,7 @@ void A7105Downloader::start(int imageIndex, const QByteArray &data)
     }
 
     Q_ASSERT(totalCount > 0);
-    qDebug() << "read total count: " << totalCount;
+    qDebug() << "write total count: " << totalCount;
 
     emit sgnProgressChange(progInPercent);
 
@@ -112,7 +113,8 @@ void A7105Downloader::sendEraseSectorRequest()
     qDebug() << __PRETTY_FUNCTION__;
     quint32 addrValue = sectorStartAddress ;
 
-    responseTimer->start();
+
+    responseTimer->start(RESPONSE_TIMEOUT_ERASE);
 
     quint8 buf[7 ] = {0};
     buf[0] = CMD_RF_TXDATA;
@@ -152,10 +154,11 @@ void A7105Downloader::sendWriteRequest()
 
     // fill data
     for (int i = 0; i < writeSize; i++) {
-        buf[7 + i] = static_cast<quint8>(curSeq * FLASH_ONE_WRITE_SIZE + i);
+        char c = bin[curSeq * FLASH_ONE_WRITE_SIZE + i];
+        buf[7 + i] = static_cast<quint8>(c);
     }
 
-    responseTimer->start();
+    responseTimer->start(RESPONSE_TIMEOUT_WRITE);
 
     QByteArray ba((char*)buf, 7 + writeSize);
     emit sgnSendFrame(ba);

@@ -11,6 +11,7 @@ FormA7105Uploader::FormA7105Uploader(QWidget *parent) :
     uploader(nullptr)
 {
     ui->setupUi(this);
+    ui->labelPreview->hide();
 }
 
 FormA7105Uploader::~FormA7105Uploader()

@@ -33,14 +33,18 @@ void FormA7105Download::sltProgressChange(int progress)
     ui->progressBar->setValue(progress);
 
     if (100 == progress) {
-        QString strElapsed = QString("elapsed %1 ms").arg(pingTime.elapsed());
-        ui->labelPingTestStatus->setText(strElapsed);
+        QString strElapsed = QString("Finished in %1 ms").arg(pingTime.elapsed());
+        ui->labelStatus->setText(strElapsed);
+    } else if (progress < 5) {
+        ui->labelStatus->setText("Downloading...");
+        QString strElapsed = QString("Elapsed %1 ms").arg(pingTime.elapsed());
+        qDebug() << strElapsed;
     }
 }
 
 void FormA7105Download::sltFailed()
 {
-    ui->labelPingTestStatus->setText("Upload Failed!");
+    ui->labelStatus->setText("Download Failed!");
 }
 
 void FormA7105Download::on_pushButtonBrowse_clicked()
@@ -69,6 +73,8 @@ void FormA7105Download::on_pushButtonDownload_clicked()
     Q_ASSERT(downloader);
     pingTime.start();
     downloader->start(ui->spinBoxImageIndex->value(), baData);
+
+    ui->labelStatus->setText("Erasing Sector");
 }
 
 void FormA7105Download::on_pushButtonStop_clicked()
