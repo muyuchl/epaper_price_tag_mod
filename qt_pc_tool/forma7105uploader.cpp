@@ -24,6 +24,9 @@ void FormA7105Uploader::setUploader(A7105Uploader *a7105Uploader)
 
     connect(uploader, &A7105Uploader::sgnProgressChange,
             this, &FormA7105Uploader::sltProgressChange);
+
+    connect(uploader, &A7105Uploader::sgnFailed,
+            this, &FormA7105Uploader::sltFailed);
 }
 
 void FormA7105Uploader::on_pushButtonUpload_clicked()
@@ -49,9 +52,14 @@ void FormA7105Uploader::sltProgressChange(int progress)
     }
 }
 
+void FormA7105Uploader::sltFailed()
+{
+    ui->labelPingTestStatus->setText("Upload Failed!");
+}
+
 void FormA7105Uploader::on_pushButtonSaveBin_clicked()
 {
-    QString defaultName = QString("upload_%1").arg(ui->spinBoxImageIndex->value());
+    QString defaultName = QString("upload_%1.bin").arg(ui->spinBoxImageIndex->value());
 
     QString fileName = QFileDialog::getSaveFileName(this, "save to file",
                                                     defaultName, "Bin (*.bin)"   );

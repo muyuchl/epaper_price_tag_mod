@@ -2,6 +2,7 @@
 #define A7105UPLOADER_H
 
 #include <QObject>
+class QTimer;
 
 // upload data from price tag to host PC via A7105
 class A7105Uploader : public QObject
@@ -19,11 +20,13 @@ public slots:
 
 public slots:
     void sltFrameReceived(QByteArray frame);
+    void sltTimeout();
 
 
 signals:
     void sgnSendFrame(QByteArray frame);
     void sgnProgressChange(int progress);
+    void sgnFailed();
 
 private:
     void sendReadRequest();
@@ -42,6 +45,11 @@ private:
     int progInPercent;
 
     QByteArray bin;
+
+    QTimer *responseTimer;
+    int retryLeft;
+    // statistic timeout count
+    int statTimeoutCount;
 };
 
 #endif // A7105UPLOADER_H

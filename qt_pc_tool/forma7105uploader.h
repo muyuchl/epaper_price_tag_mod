@@ -23,6 +23,7 @@ private slots:
     void on_pushButtonUpload_clicked();
     void on_pushButtonStop_clicked();
     void sltProgressChange(int progress);
+    void sltFailed();
 
     void on_pushButtonSaveBin_clicked();
 
