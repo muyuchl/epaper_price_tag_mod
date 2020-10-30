@@ -13,6 +13,7 @@
 
 #include "forma7105pingtest.h"
 #include "forma7105uploader.h"
+#include "forma7105download.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -24,9 +25,11 @@ MainWindow::MainWindow(QWidget *parent) :
     formLed(new FormLed()),
     formA7105PingTest(new FormA7105PingTest()),
     formA7105Upploader(new FormA7105Uploader()),
+    formA7105Download(new FormA7105Download()),
     dialogPortConfig(new DialogPortConfig(this)),
     a7105PingTest(new A7105PingTest()),
-    a7105Upploader(new A7105Uploader())
+    a7105Upploader(new A7105Uploader()),
+    a7105Downloader(new A7105Downloader())
 {
     ui->setupUi(this);
 
@@ -38,6 +41,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->tabWidget->addTab(formA7105Upploader, "A7105 Uploader");
     formA7105Upploader->setUploader(a7105Upploader);
+
+    ui->tabWidget->addTab(formA7105Download, "A7105 Download");
+    formA7105Download->setDownloader(a7105Downloader);
 
     statusBar()->addWidget(labelStatusPortName);
     statusBar()->addWidget(labelStatusPortError);
@@ -103,6 +109,11 @@ void MainWindow::init()
     connect(uartHandler, &UartHandler::sgnFrameReceived,
             a7105Upploader, &A7105Uploader::sltFrameReceived);
     connect(a7105Upploader, &A7105Uploader::sgnSendFrame,
+            uartHandler, &UartHandler::sltSendFrame);
+
+    connect(uartHandler, &UartHandler::sgnFrameReceived,
+            a7105Downloader, &A7105Downloader::sltFrameReceived);
+    connect(a7105Downloader, &A7105Downloader::sgnSendFrame,
             uartHandler, &UartHandler::sltSendFrame);
 
 }

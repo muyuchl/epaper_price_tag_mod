@@ -8,6 +8,7 @@
 
 #include "a7105pingtest.h"
 #include "a7105uploader.h"
+#include "a7105downloader.h"
 
 namespace Ui {
 class MainWindow;
@@ -20,6 +21,7 @@ class QLabel;
 class A7105PingTest;
 class FormA7105PingTest;
 class FormA7105Uploader;
+class FormA7105Download;
 
 class MainWindow : public QMainWindow
 {
@@ -50,6 +52,7 @@ private:
 
     FormA7105PingTest *formA7105PingTest;
     FormA7105Uploader *formA7105Upploader;
+    FormA7105Download *formA7105Download;
 
     DialogPortConfig *dialogPortConfig;
 
@@ -58,7 +61,7 @@ private:
 
     A7105PingTest *a7105PingTest;
     A7105Uploader *a7105Upploader;
-
+    A7105Downloader *a7105Downloader;
 };
 
 #endif // MAINWINDOW_H

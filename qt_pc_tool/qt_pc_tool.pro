@@ -34,7 +34,9 @@ SOURCES += \
     a7105pingtest.cpp \
     forma7105pingtest.cpp \
     a7105uploader.cpp \
-    forma7105uploader.cpp
+    forma7105uploader.cpp \
+    a7105downloader.cpp \
+    forma7105download.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -46,7 +48,9 @@ HEADERS += \
     a7105pingtest.h \
     forma7105pingtest.h \
     a7105uploader.h \
-    forma7105uploader.h
+    forma7105uploader.h \
+    a7105downloader.h \
+    forma7105download.h
 
 FORMS += \
         mainwindow.ui \
@@ -57,7 +61,8 @@ FORMS += \
     forma7105.ui \
     formepaperimage.ui \
     forma7105pingtest.ui \
-    forma7105uploader.ui
+    forma7105uploader.ui \
+    forma7105download.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
