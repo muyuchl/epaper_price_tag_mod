@@ -59,6 +59,8 @@ void A7105Uploader::start(int imageIndex)
 
 void A7105Uploader::stop()
 {
+    responseTimer->stop();
+
     curSeq = 0;
     progInPercent = 0;
     totalCount = 0;
