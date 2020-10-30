@@ -52,6 +52,9 @@ void FormA7105::parseRxedRFFrame(const QByteArray &frame)
     case RFCMD_WRITE_FLASH_DATA_RESP:
         parseWriteDataResponse(frame);
         break;
+    case RFCMD_FLASH_CHIP_ERASE_RESP:
+        parseChipEraseResponse(frame);
+        break;
     default:
         qDebug()<< "unknow rfcmdid: " << rfcmdid;
         break;
@@ -132,6 +135,11 @@ void FormA7105::parseWriteDataResponse(const QByteArray &frame)
         ui->labelStatus->setText("write 4KB finish");
     }
 
+}
+
+void FormA7105::parseChipEraseResponse(const QByteArray &frame)
+{
+    ui->labelStatus->setText("chip erase done");
 }
 
 void FormA7105::sendLongReadRequest()
@@ -261,6 +269,10 @@ void FormA7105::on_pushButtonReadData_clicked()
         QMessageBox::warning(this, "error", "read len out of range (1, 32)");
         return;
     }
+
+    longReadAddr = addrValue;
+    longReadAddrEnd = longReadAddr + readLen;
+    baLongRead.clear();
 
     quint8 buf[7 ] = {0};
     buf[0] = CMD_RF_TXDATA;
@@ -426,7 +438,41 @@ void FormA7105::on_pushButtonWrite4KB_clicked()
         emit sgnSendFrame(ba);
     }
 
+}
 
+void FormA7105::on_pushButtonChipErase_clicked()
+{
+    ui->labelStatus->setText("erasing flash");
 
+    quint8 buf[7 ] = {0};
+    buf[0] = CMD_RF_TXDATA;
+    buf[1] = RFCMD_FLASH_CHIP_ERASE;
+
+    QByteArray ba((char*)buf, 2);
+
+    emit sgnSendFrame(ba);
+}
+
+void FormA7105::on_pushButtonWriteBin_clicked()
+{
+
+    QString fileName = QFileDialog::getOpenFileName(this, "Select bin File", QString());
+    qDebug() << __PRETTY_FUNCTION__ << fileName;
+
+    if (fileName.isEmpty())
+    {
+        return;
+    }
+
+    QFile f(fileName);
+    if (f.open(QIODevice::ReadOnly)) {
+        baLongWriting = f.readAll();
+        writeIndex = 0;
+
+        longWriteStartAddr = 0x00;
+
+    sendLongWriteRequest();
+
+    }
 
 }

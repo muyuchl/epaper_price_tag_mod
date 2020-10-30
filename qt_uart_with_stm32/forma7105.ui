@@ -234,6 +234,24 @@
     </layout>
    </item>
    <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_6">
+     <item>
+      <widget class="QPushButton" name="pushButtonChipErase">
+       <property name="text">
+        <string>Chip Erase</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButtonWriteBin">
+       <property name="text">
+        <string>Write Bin Data</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
     <widget class="QLabel" name="labelStatus">
      <property name="text">
       <string>TextLabel</string>

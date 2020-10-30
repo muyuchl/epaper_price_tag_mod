@@ -35,6 +35,10 @@ private slots:
 
     void on_pushButtonWrite4KB_clicked();
 
+    void on_pushButtonChipErase_clicked();
+
+    void on_pushButtonWriteBin_clicked();
+
 private:
     void parseRxedRFFrame(const QByteArray &frame);
     void parsePingResponse(const QByteArray &frame);
@@ -43,6 +47,8 @@ private:
 
     void parseSectorEraseResponse(const QByteArray &frame);
     void parseWriteDataResponse(const QByteArray &frame);
+
+    void parseChipEraseResponse(const QByteArray &frame);
 
     void sendLongReadRequest();
 
