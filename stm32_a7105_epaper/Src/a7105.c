@@ -48,7 +48,8 @@ void initRF(void)
 	A7105_Cal();
 	HAL_Delay(100);
 
-	A7105_ReadID();
+	uint8_t buf[5];
+	A7105_ReadID(buf);
 }
 
 void A7105_Reset(void)
@@ -61,11 +62,16 @@ void A7105_ToRxMode(void)
 {
 	SetCH(RF_CHANNEL - 1);
     StrobeCmd(CMD_RX);
+}
 
+void A7105_ToStbMode(void)
+{
+	StrobeCmd(CMD_STBY);
 }
 
 void A7105_TxData(uint8_t * data, int len)
 {
+	int count = 0;
 
 	StrobeCmd(CMD_STBY);
 
@@ -74,9 +80,11 @@ void A7105_TxData(uint8_t * data, int len)
 	    SetCH(RF_CHANNEL);
 
 	    StrobeCmd(CMD_TX);
-	    while (GPIO_PIN_SET == HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_3))
+	    while (GPIO_PIN_SET == HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_3)
+	    		&& count < 10)
 	    {
-	        ;
+	    	count++;
+	        HAL_Delay(10);
 	    }
 
 }
@@ -140,9 +148,9 @@ void A7105_WriteID(void)
 	RF_CS_HI;
 }
 
-void A7105_ReadID(void)
+void A7105_ReadID(uint8_t *buf)
 {
-	uint8_t buf[5];
+	// uint8_t buf[5];
 
 	buf[0] = 0x40 | IDCODE_REG;	// reg addr
 	//		buf[1] = id_table[0];	// id data byte 0
@@ -278,6 +286,11 @@ uint8_t A7105_CRC_OK(void)
 		return 0;
 	}
 
+}
+
+uint8_t A7105_ReadRSSI(void)
+{
+	return A7105_ReadReg(RSSI_REG);
 }
 
 void RxPacket(uint8_t *data, int len)

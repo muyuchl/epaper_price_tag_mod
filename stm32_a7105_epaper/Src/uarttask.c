@@ -26,6 +26,8 @@ void handle_command_rftest( const char *cmd_data, int cmd_data_len);
 
 void handle_command_rftx( const char *cmd_data, int cmd_data_len);
 
+void handle_command_rf_readid( const char *cmd_data, int cmd_data_len);
+
 /* parse raw uart frame and handle commands */
 void parse_rx_buf(const char *buf, int len)
 {
@@ -139,6 +141,9 @@ void handle_command(uint8_t cmd, const char *cmd_data, int cmd_data_len)
 	case CMD_RF_TXDATA:
 		handle_command_rftx(cmd_data, cmd_data_len);
 		break;
+
+	case CMD_RF_READ_ID:
+		handle_command_rf_readid(cmd_data, cmd_data_len);
 	}
 
 }
@@ -354,6 +359,23 @@ void handle_command_rftx(const char *cmd_data, int cmd_data_len)
 	tx_response(tmpBuf, responseFrameLen);
 }
 
+
+void handle_command_rf_readid( const char *cmd_data, int cmd_data_len)
+{
+
+	int responseFrameLen = 5;   // include response cmd
+	char tmpBuf[64];
+
+	tmpBuf[0] = RESPONSE_FLAG | CMD_RF_READ_ID;
+
+
+	A7105_ReadID(tmpBuf + 1);
+
+
+	responseFrameLen = 5;
+
+	tx_response(tmpBuf, responseFrameLen);
+}
 
 
 

@@ -76,7 +76,8 @@ static void MX_USART2_UART_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-
+static void check_uart();
+static void check_rf();
 /* USER CODE END 0 */
 
 /**
@@ -123,70 +124,18 @@ int main(void)
 
 	StrobeCmd(CMD_STBY);
 
-	SetCH(RF_CHANNEL - 1);
-	StrobeCmd(CMD_RX);
+	A7105_ToRxMode();
 
 	while (1)
 	{
 		/* USER CODE END WHILE */
 
 		/* USER CODE BEGIN 3 */
-		if(recv_end_flag ==1)
-		{
-			//printf("rx_len=%d\r\n",rx_len);//打印接收长度
-			//			HAL_UART_Transmit(&huart1,rx_buffer, rx_len, 5000); //接收数据打印出来
-			//			for(uint8_t i=0;i<rx_len;i++)
-			//				{
-			//					rx_buffer[i]=0;//清接收缓�?
-			//				}
 
-			parse_rx_buf((char *)rx_buffer, rx_len);
+		check_uart();
+		check_rf();
 
-			rx_len=0;//清除计数
-			recv_end_flag=0;//清除接收结束标志�?
-		}
-		//重新打开DMA接收
-		HAL_UART_Receive_DMA(&huart1,rx_buffer, RX_BUFFER_SIZE);
 
-		if (GPIO_PIN_RESET == HAL_GPIO_ReadPin(rf_gio2_GPIO_Port, rf_gio2_Pin))
-		{
-			if (A7105_CRC_OK()) {
-				debuglog("rf gio2 is low, should have rx data \r\n");
-				uint8_t buf[64] = {0};
-
-				RxPacket(buf, 64);
-				// read first few bytes
-				for (int i = 0; i < 8; i++) {
-					debuglog("%02X \r\n", buf[i]);
-				}
-
-				if (connected_with_host)
-				{
-					// report to host pc
-						report_rf_data(buf, 64);
-				} else {
-					// send back via RF
-					HAL_Delay(500);
-
-					uint8_t respbuf[64] = {0};
-					int strlength = sprintf((char *)respbuf, "response: ");
-					for (int i = strlength + 1; i < 40; i++)
-					{
-						respbuf[i] = buf[i - strlength - 1];
-					}
-
-					A7105_TxData(respbuf, 64);
-
-				}
-
-			} else {
-				debuglog("crc error \r\n");
-			}
-
-			// back to rx mode
-			A7105_ToRxMode();
-
-		}
 
 	}
 	/* USER CODE END 3 */
@@ -393,7 +342,76 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+void check_uart()
+{
+	if(recv_end_flag ==1)
+	{
+		//printf("rx_len=%d\r\n",rx_len);//打印接收长度
+		//			HAL_UART_Transmit(&huart1,rx_buffer, rx_len, 5000); //接收数据打印出来
+		//			for(uint8_t i=0;i<rx_len;i++)
+		//				{
+		//					rx_buffer[i]=0;//清接收缓�?
+		//				}
 
+		parse_rx_buf((char *)rx_buffer, rx_len);
+
+		rx_len=0;//清除计数
+		recv_end_flag=0;//清除接收结束标志�?
+	}
+	//reenable dma rx
+	HAL_UART_Receive_DMA(&huart1,rx_buffer, RX_BUFFER_SIZE);
+}
+
+void check_rf()
+{
+	if (GPIO_PIN_RESET == HAL_GPIO_ReadPin(rf_gio2_GPIO_Port, rf_gio2_Pin))
+	{
+		if (A7105_CRC_OK()) {
+			debuglog("rf gio2 is low, should have rx data \r\n");
+			uint8_t buf[64] = {0};
+
+			RxPacket(buf, 64);
+			// read first few bytes
+			for (int i = 0; i < 8; i++) {
+				debuglog("%02X \r\n", buf[i]);
+			}
+
+			uint8_t rssi = A7105_ReadRSSI();
+			debuglog("rssi: %d \r\n", rssi);
+
+			if (connected_with_host)
+			{
+				// report to host pc
+				report_rf_data(buf, 64);
+			} else {
+				// send back via RF
+				HAL_Delay(500);
+
+				uint8_t respbuf[64] = {0};
+				int strlength = sprintf((char *)respbuf, "response: ");
+				for (int i = strlength + 1; i < 40; i++)
+				{
+					respbuf[i] = buf[i - strlength - 1];
+				}
+
+				A7105_TxData(respbuf, 64);
+			}
+
+		} else {
+			debuglog("crc error \r\n");
+			uint8_t buf[64] = {0};
+			RxPacket(buf, 64);
+
+			A7105_ToStbMode();
+			HAL_Delay(100);
+		}
+
+		// back to rx mode
+		A7105_ToRxMode();
+
+	}
+
+}
 /* USER CODE END 4 */
 
 /**
