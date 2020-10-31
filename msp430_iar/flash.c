@@ -269,9 +269,12 @@ flash_write_enable();
 	wait_until_not_busy();
 }
 
-void flash_write_data(uint32_t addr, uint8_t *buf, uint16_t len)
+/* workaround, len is less than or equal 8 byte, otherwise not reliable
+but according to datasheet, one write 256 byte is not a problem.
+maybe it's issue about timging */
+void do_write_data(uint32_t addr, uint8_t *buf, uint16_t len)
 {
-		flash_write_enable();
+	flash_write_enable();
 
 	uint8_t txbuf[4]  = {0};
 
@@ -294,4 +297,22 @@ void flash_write_data(uint32_t addr, uint8_t *buf, uint16_t len)
 	CS_1;
 
 	wait_until_not_busy();
+}
+
+void flash_write_data(uint32_t addr, uint8_t *buf, uint16_t len)
+{  
+	int count = 0;
+
+	count = len / 8;
+    	for (int i = 0; i < count; i++) {
+    		int offset = i * 8;
+    		do_write_data(addr + offset, buf+offset, 8);
+    		delay_us(6);	
+    	}
+
+    
+    if (0 != (len % 8)) {
+    	// last segment, less than 8 byte
+    	do_write_data(addr + count * 8, buf + count * 8, len % 8);	
+    } 
 }
