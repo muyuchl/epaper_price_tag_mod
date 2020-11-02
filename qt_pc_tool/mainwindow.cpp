@@ -130,3 +130,13 @@ void MainWindow::on_actionTextToBin_triggered()
     DialogTextToImage dlg;
     dlg.exec();
 }
+
+void MainWindow::on_actionBatchUpload_triggered()
+{
+
+}
+
+void MainWindow::on_actionBatchDownload_triggered()
+{
+
+}

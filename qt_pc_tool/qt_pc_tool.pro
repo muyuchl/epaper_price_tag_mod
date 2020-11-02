@@ -74,7 +74,9 @@ FORMS += \
     formtest.ui \
     dialogtexttoimage.ui
 
-# Default rules for deployment.
-qnx: target.path = /tmp/$${TARGET}/bin
-else: unix:!android: target.path = /opt/$${TARGET}/bin
-!isEmpty(target.path): INSTALLS += target
+# Instructions to compile the icon.
+RC_FILE = icon/simulator.rc
+
+RESOURCES += \
+    resource.qrc
+

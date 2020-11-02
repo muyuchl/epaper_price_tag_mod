@@ -40,6 +40,10 @@ private slots:
 
     void on_actionTextToBin_triggered();
 
+    void on_actionBatchUpload_triggered();
+
+    void on_actionBatchDownload_triggered();
+
 private:
     void init();
 

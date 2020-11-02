@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>Host App For STM32 Comm</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="resource.qrc">
+    <normaloff>:/images/tag.png</normaloff>:/images/tag.png</iconset>
+  </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
@@ -39,6 +43,8 @@
    </attribute>
    <addaction name="actionPortConfig"/>
    <addaction name="actionTextToBin"/>
+   <addaction name="actionBatchUpload"/>
+   <addaction name="actionBatchDownload"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionPortConfig">
@@ -51,8 +57,20 @@
     <string>TextToBin</string>
    </property>
   </action>
+  <action name="actionBatchUpload">
+   <property name="text">
+    <string>BatchUpload</string>
+   </property>
+  </action>
+  <action name="actionBatchDownload">
+   <property name="text">
+    <string>BatchDownload</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources/>
+ <resources>
+  <include location="resource.qrc"/>
+ </resources>
  <connections/>
 </ui>
