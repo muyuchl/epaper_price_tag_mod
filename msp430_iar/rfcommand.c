@@ -140,7 +140,9 @@ uint8_t img_buf[16];
 
 epd_pre_update();
 
-for (int i = 0; i < 4 * 1024 / ONE_READ_SIZE; i++) {
+
+
+for (int i = 0; i < 4000 / ONE_READ_SIZE; i++) {
   flash_read_data(img_buf, addr + i * ONE_READ_SIZE, ONE_READ_SIZE);
   epd_update_ram(img_buf, ONE_READ_SIZE);
 }
