@@ -65,6 +65,9 @@ MainWindow::MainWindow(QWidget *parent) :
     batchUploader->setUploader(a7105Upploader);
     formBatchUploader->setBatchUploader(batchUploader);
 
+    formBatchUploader->setAttribute(Qt::WA_ShowModal, true);
+    formBatchDownloader->setAttribute(Qt::WA_ShowModal, true);
+
     statusBar()->addWidget(labelStatusPortName);
     statusBar()->addWidget(labelStatusPortError);
     statusBar()->addWidget(labelStatusPortStatistic);

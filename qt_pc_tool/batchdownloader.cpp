@@ -33,11 +33,19 @@ void BatchDownloader::start(int startIndex, const QStringList &files)
 
 void BatchDownloader::stop()
 {
+    batchStartIndex = 0;
+    binFiles.clear();
+    curIdxDownloading = 0;
+
     a7105Downloader->stop();
 }
 
 void BatchDownloader::sltProgressChange(int progress)
 {
+    if (0 == binFiles.size()) {
+        return;
+    }
+
     emit sgnProgressChange(curIdxDownloading, progress);
     if (progress == 100) {
         curIdxDownloading++;
@@ -45,7 +53,7 @@ void BatchDownloader::sltProgressChange(int progress)
         if (curIdxDownloading == binFiles.size()) {
             emit sgnAllDone();
             return;
-        } else {
+        } else if (binFiles.size() > 0){
             // next file
             startDownloading();
         }
@@ -56,14 +64,18 @@ void BatchDownloader::sltProgressChange(int progress)
 void BatchDownloader::sltFailed()
 {
     qWarning() << __PRETTY_FUNCTION__ ;
+
+    batchStartIndex = 0;
+    binFiles.clear();
+    curIdxDownloading = 0;
+
     emit sgnFailed();
 }
 
 void BatchDownloader::startDownloading()
 {
-    qDebug() << "start downloading " << binFiles[curIdxDownloading];
-
     if (curIdxDownloading < binFiles.size()) {
+        qDebug() << "start downloading " << binFiles[curIdxDownloading];
         QFile binFile(binFiles[curIdxDownloading]);
         if (!binFile.open(QIODevice::ReadOnly)) {
             emit sgnFailed();

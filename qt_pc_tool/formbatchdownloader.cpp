@@ -32,6 +32,13 @@ void FormBatchDownloader::setBatchDownloader(BatchDownloader *downloader)
             this, &FormBatchDownloader::sltProgressChange);
 }
 
+void FormBatchDownloader::closeEvent(QCloseEvent *event)
+{
+    // alwary stop batchdownloader when closed
+    batchDownloader->stop();
+    QWidget::closeEvent(event);
+}
+
 void FormBatchDownloader::initTableWidget()
 {
   //  ui->tableWidget->setRowCount(MAX_PICTURES);
@@ -108,6 +115,10 @@ void FormBatchDownloader::sltAllDone()
 
 void FormBatchDownloader::sltProgressChange(int fileIndex, int progress)
 {
+    if (!this->isVisible()) {
+        return;
+    }
+
     QTableWidgetItem *item = new QTableWidgetItem(QString("%1").arg(progress));
     ui->tableWidget->setItem(fileIndex, COL_PROGRESS, item);
 }

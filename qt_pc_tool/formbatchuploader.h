@@ -30,6 +30,9 @@ private slots:
     void sltAllDone();
     void sltProgressChange(int picIndex, int progress);
 
+protected:
+     void closeEvent(QCloseEvent *event) override;
+
 private:
     void initTableWidget();
 
