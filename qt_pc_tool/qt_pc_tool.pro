@@ -40,7 +40,11 @@ SOURCES += \
     monoimagelabel.cpp \
     formtest.cpp \
     dialogtexttoimage.cpp \
-    texttobingenerator.cpp
+    texttobingenerator.cpp \
+    batchdownloader.cpp \
+    batchuploader.cpp \
+    formbatchdownloader.cpp \
+    formbatchuploader.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -58,7 +62,11 @@ HEADERS += \
     monoimagelabel.h \
     formtest.h \
     dialogtexttoimage.h \
-    texttobingenerator.h
+    texttobingenerator.h \
+    batchdownloader.h \
+    batchuploader.h \
+    formbatchdownloader.h \
+    formbatchuploader.h
 
 FORMS += \
         mainwindow.ui \
@@ -72,7 +80,10 @@ FORMS += \
     forma7105uploader.ui \
     forma7105download.ui \
     formtest.ui \
-    dialogtexttoimage.ui
+    dialogtexttoimage.ui \
+    formbatchdownloader.ui \
+    formbatchuploader.ui \
+    formepaperimage.ui
 
 # Instructions to compile the icon.
 RC_FILE = icon/simulator.rc

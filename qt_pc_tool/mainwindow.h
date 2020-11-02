@@ -24,6 +24,11 @@ class FormA7105Uploader;
 class FormA7105Download;
 class FormTest;
 
+class FormBatchDownloader;
+class BatchDownloader;
+class FormBatchUploader;
+class BatchUploader;
+
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -70,6 +75,12 @@ private:
     A7105PingTest *a7105PingTest;
     A7105Uploader *a7105Upploader;
     A7105Downloader *a7105Downloader;
+
+    FormBatchDownloader *formBatchDownloader;
+    BatchDownloader *batchDownloader;
+
+    FormBatchUploader *formBatchUploader;
+    BatchUploader *batchUploader;
 };
 
 #endif // MAINWINDOW_H

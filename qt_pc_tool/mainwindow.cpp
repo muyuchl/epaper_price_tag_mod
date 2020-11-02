@@ -17,6 +17,11 @@
 #include "formtest.h"
 #include "dialogtexttoimage.h"
 
+#include "formbatchdownloader.h"
+#include "batchdownloader.h"
+#include "batchuploader.h"
+#include "formbatchuploader.h"
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
@@ -32,7 +37,11 @@ MainWindow::MainWindow(QWidget *parent) :
     dialogPortConfig(new DialogPortConfig(this)),
     a7105PingTest(new A7105PingTest()),
     a7105Upploader(new A7105Uploader()),
-    a7105Downloader(new A7105Downloader())
+    a7105Downloader(new A7105Downloader()),
+    formBatchDownloader(new FormBatchDownloader(nullptr)),
+    batchDownloader(new BatchDownloader()),
+    formBatchUploader(new FormBatchUploader(nullptr)),
+    batchUploader(new BatchUploader())
 {
     ui->setupUi(this);
 
@@ -49,6 +58,12 @@ MainWindow::MainWindow(QWidget *parent) :
     formA7105Download->setDownloader(a7105Downloader);
 
     ui->tabWidget->addTab(formTest, "Test");
+
+    batchDownloader->setA7105Downloader(a7105Downloader);
+    formBatchDownloader->setBatchDownloader(batchDownloader);
+
+    batchUploader->setUploader(a7105Upploader);
+    formBatchUploader->setBatchUploader(batchUploader);
 
     statusBar()->addWidget(labelStatusPortName);
     statusBar()->addWidget(labelStatusPortError);
@@ -133,10 +148,10 @@ void MainWindow::on_actionTextToBin_triggered()
 
 void MainWindow::on_actionBatchUpload_triggered()
 {
-
+    formBatchUploader->show();
 }
 
 void MainWindow::on_actionBatchDownload_triggered()
 {
-
+    formBatchDownloader->show();
 }
