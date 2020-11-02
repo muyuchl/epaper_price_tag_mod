@@ -35,11 +35,18 @@ void BatchUploader::start(int startIndex, int count)
 
 void BatchUploader::stop()
 {
+    uploadStartIndex = 0;
+    uploadCount = (0);
+    curIdxTask = (0);
     a7105Uploader->stop();
 }
 
 void BatchUploader::sltProgressChange(int progress)
 {
+    if (uploadCount == 0) {
+        return;
+    }
+
     emit sgnProgressChange(uploadStartIndex + curIdxTask, progress);
 
     if (progress == 100) {
@@ -48,7 +55,7 @@ void BatchUploader::sltProgressChange(int progress)
 
         if (curIdxTask == uploadCount - 1) {
             emit sgnAllDone();
-        } else {
+        } else if (uploadCount > 0) {
             curIdxTask++;
             startUploading();
         }
@@ -59,6 +66,10 @@ void BatchUploader::sltProgressChange(int progress)
 
 void BatchUploader::sltFailed()
 {
+    uploadStartIndex = 0;
+    uploadCount = (0);
+    curIdxTask = (0);
+
     emit sgnFailed();
 }
 
