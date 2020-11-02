@@ -26,6 +26,8 @@ private slots:
 
 private:
   //  void saveBin(QString &fileName);
+    void processBatchTaskFile(const QString &taskFileName);
+    void generateBinFromTaskLine(const QString &parentPath, const QString &line);
 
 private:
     Ui::DialogTextToImage *ui;

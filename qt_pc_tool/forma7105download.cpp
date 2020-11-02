@@ -50,7 +50,7 @@ void FormA7105Download::sltFailed()
 void FormA7105Download::on_pushButtonBrowse_clicked()
 {
     QString fileName = QFileDialog::getOpenFileName(this, "Select bin File",
-                                                    QString(), "Bin (*.bin)");
+                                                    QString(), "Bin (*.bin);; All file (*)");
     qDebug() << __PRETTY_FUNCTION__ << fileName;
 
     if (fileName.isEmpty())

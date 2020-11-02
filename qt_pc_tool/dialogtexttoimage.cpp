@@ -77,11 +77,69 @@ void DialogTextToImage::on_pushButtonSaveBin_clicked()
     QFont font = ui->fontComboBox->currentFont();
 
     TextToBinGenerator::generateBin(font.family(),ui->spinBoxFontSize->value(),
-                                   lines, fileName );
+                                    lines, fileName );
 
 }
 
 void DialogTextToImage::on_pushButtonBatchGen_clicked()
 {
+    QString fileName = QFileDialog::getOpenFileName(this, "open batch task file", QString(),
+                                                    "CSV (*.csv)");
+    if (fileName.isEmpty()) {
+        return;
+    }
 
+    qDebug() << "batch task file name:" << fileName;
+
+    processBatchTaskFile(fileName);
+}
+
+void DialogTextToImage::processBatchTaskFile(const QString &taskFileName)
+{
+    QFile file(taskFileName);
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        qWarning() << "can not open file for read " << taskFileName;
+        return;
+    }
+
+    QDir dir = QFileInfo(taskFileName).absoluteDir();
+
+    QTextStream in(&file);
+    while (!in.atEnd()) {
+        QString line = in.readLine();
+
+        generateBinFromTaskLine(dir.absolutePath(), line);
+        qDebug() << "-----------------------------------------";
+    }
+
+}
+
+void DialogTextToImage::generateBinFromTaskLine(const QString &parentPath, const QString &line)
+{
+ //   qDebug() << "generating for " << parentPath << "  " << line;
+
+    QStringList fields = line.split(',');
+    if (fields.size() != 3) {
+        qWarning() << "invalid field format for line: " << line;
+        return;
+    }
+
+    QString fontFamily = fields[0];
+    int pixSize = fields[1].toInt();
+
+    QStringList textLines = fields[2].split("\\n");
+    if (textLines.size() < 1) {
+        return;
+    }
+
+    QDir dir(parentPath);
+    QFileInfo fi(dir, QString("%1.bin").arg(textLines[0]));
+    QString binFileName = fi.absoluteFilePath();
+    qDebug() << "bin file path: " << binFileName;
+
+
+
+
+    TextToBinGenerator::generateBin(fontFamily, pixSize,
+                                    textLines, binFileName );
 }
