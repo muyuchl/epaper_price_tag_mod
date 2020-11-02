@@ -38,6 +38,8 @@ private slots:
 
     void on_actionPortConfig_triggered();
 
+    void on_actionTextToBin_triggered();
+
 private:
     void init();
 

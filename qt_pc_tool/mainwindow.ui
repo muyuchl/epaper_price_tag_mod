@@ -38,11 +38,17 @@
     <bool>false</bool>
    </attribute>
    <addaction name="actionPortConfig"/>
+   <addaction name="actionTextToBin"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionPortConfig">
    <property name="text">
     <string>PortConfig</string>
+   </property>
+  </action>
+  <action name="actionTextToBin">
+   <property name="text">
+    <string>TextToBin</string>
    </property>
   </action>
  </widget>

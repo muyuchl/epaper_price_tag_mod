@@ -15,6 +15,7 @@
 #include "forma7105uploader.h"
 #include "forma7105download.h"
 #include "formtest.h"
+#include "dialogtexttoimage.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -122,4 +123,10 @@ void MainWindow::init()
 
     connect(formTest, &FormTest::sgnSendFrame,
             uartHandler, &UartHandler::sltSendFrame);
+}
+
+void MainWindow::on_actionTextToBin_triggered()
+{
+    DialogTextToImage dlg;
+    dlg.exec();
 }
