@@ -139,6 +139,8 @@ void MainWindow::init()
     connect(a7105Downloader, &A7105Downloader::sgnSendFrame,
             uartHandler, &UartHandler::sltSendFrame);
 
+    connect(uartHandler, &UartHandler::sgnFrameReceived,
+            formTest, &FormTest::sltFrameReceived);
     connect(formTest, &FormTest::sgnSendFrame,
             uartHandler, &UartHandler::sltSendFrame);
 }
