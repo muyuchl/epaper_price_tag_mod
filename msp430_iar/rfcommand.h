@@ -44,6 +44,9 @@ enum {
     // 3 byte address (MSB first)
     RFCMD_LOAD_IMAGE_FROM_FLASH_RESP = 0x0D,
 
+    // 1 BYTE index data
+    RFCMD_SET_IMAGE_RAND_INDEX = 0x10,
+    RFCMD_SET_IMAGE_RAND_INDEX_RESP = 0x12,
 
     RFCMD_FLASH_CHIP_ERASE = 0x14,
     RFCMD_FLASH_CHIP_ERASE_RESP = 0x15,
@@ -64,5 +67,6 @@ void handle_flash_write(unsigned char *buf);
 void handle_epd_fill(unsigned char *buf);
 
 void handle_epd_load_from_flash(unsigned char *buf);
+void handle_set_image_rand_index(unsigned char *buf);
 
 #endif

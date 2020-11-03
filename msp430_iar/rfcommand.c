@@ -5,6 +5,8 @@
 
 const int ONE_READ_SIZE = 16;
 
+extern uint8_t random_table_index;
+
 void check_and_handle_rf_command()
 {
 
@@ -153,4 +155,13 @@ for (int i = 0; i < 4000 / ONE_READ_SIZE; i++) {
 
 a7105_tx_data(buf, RF_FRAME_LEN);
 
+}
+
+void handle_set_image_rand_index(unsigned char *buf)
+{
+  buf[0] = RFCMD_SET_IMAGE_RAND_INDEX_RESP;
+
+  random_table_index = buf[1];
+
+  a7105_tx_data(buf, RF_FRAME_LEN); 
 }
