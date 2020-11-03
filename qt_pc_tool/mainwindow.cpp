@@ -65,6 +65,9 @@ MainWindow::MainWindow(QWidget *parent) :
     batchUploader->setUploader(a7105Upploader);
     formBatchUploader->setBatchUploader(batchUploader);
 
+    formBatchUploader->setAttribute(Qt::WA_ShowModal, true);
+    formBatchDownloader->setAttribute(Qt::WA_ShowModal, true);
+
     statusBar()->addWidget(labelStatusPortName);
     statusBar()->addWidget(labelStatusPortError);
     statusBar()->addWidget(labelStatusPortStatistic);
@@ -136,6 +139,8 @@ void MainWindow::init()
     connect(a7105Downloader, &A7105Downloader::sgnSendFrame,
             uartHandler, &UartHandler::sltSendFrame);
 
+    connect(uartHandler, &UartHandler::sgnFrameReceived,
+            formTest, &FormTest::sltFrameReceived);
     connect(formTest, &FormTest::sgnSendFrame,
             uartHandler, &UartHandler::sltSendFrame);
 }

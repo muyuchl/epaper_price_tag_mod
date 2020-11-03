@@ -74,12 +74,23 @@ void FormBatchUploader::sltAllDone()
 
 void FormBatchUploader::sltProgressChange(int picIndex, int progress)
 {
+    if (!this->isVisible()) {
+        return;
+    }
+
     int row = picIndex - startIdx;
     Q_ASSERT(row >= 0 && row <= ui->tableWidget->rowCount());
 
     // update progress
     QTableWidgetItem *newItem = new QTableWidgetItem(tr("%1").arg(progress));
     ui->tableWidget->setItem(row, COL_PROGRESS, newItem);
+}
+
+void FormBatchUploader::closeEvent(QCloseEvent *event)
+{
+    // alwary stop batchdownloader when closed
+    batchUploader->stop();
+    QWidget::closeEvent(event);
 }
 
 void FormBatchUploader::initTableWidget()
