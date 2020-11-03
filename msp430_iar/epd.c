@@ -86,6 +86,12 @@ void epd_init()
     //     fill_predefinedimage();
 }
 
+void epd_sleep()
+{
+epd_sendcmddata(0x10,0x01);  
+}
+ 
+
 void epd_pre_update()
 {
   // set ram x address counter

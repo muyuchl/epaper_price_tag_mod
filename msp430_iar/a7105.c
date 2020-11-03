@@ -71,6 +71,11 @@ void a7105_init()
 	delay_us(1); 
 }
 
+void a7105_sleep()
+{
+    a7105_strobe_cmd(CMD_SLEEP);
+}
+
 void a7105_reset()
 {
 	a7105_write_reg(MODE_REG, 0x00);

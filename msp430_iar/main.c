@@ -15,8 +15,8 @@ volatile uint16_t tick = 0;
 uint8_t low_power_state = 0;
 
 // if idle more than this tick, enter low power mode
-const uint16_t INITIAL_IDLE_TICK_COUNT = 5;
-const uint16_t SWITCH_PIC_TICK_COUNT = 5;
+const uint16_t INITIAL_IDLE_TICK_COUNT = 3;
+const uint16_t SWITCH_PIC_TICK_COUNT = 24*60;
 
 int count = 0;
 int crcErrCount = 0;
@@ -98,20 +98,35 @@ flash_init();
   		if (tick >= SWITCH_PIC_TICK_COUNT) {
   			tick = 0; // reset to 0
   			// switch picture
+                        //epdon;
+                        epd_init();
+                        
   			switch_pic();
   			delay_ms(400);
   			
   		}
-
+                delay_ms(1000);
+                epd_sleep();
+                delay_ms(500);
+                epdoff;
   		LPM3;
 
   	} else {
   		check_rf();		
 
   		if (tick >= INITIAL_IDLE_TICK_COUNT) {
+                      tick = 0;	// reset to 0
+                        epd_init();                        
+  			switch_pic();
+                        delay_ms(1000);
   			// enter low power state
   			low_power_state = 1;
-  			tick = 0;	// reset to 0
+  			
+                        
+                        // not necessary, we are turning off the chip
+                        a7105_sleep();
+                        // turn off rf
+                        rfoff;
 
   		}
   	}
@@ -146,6 +161,7 @@ if (a7105_gio2_low() ) {
     		tick = 0;
     	} else {
     		crcErrCount++;
+                random_table_index++;
     		delay_ms(100);
     		// read to discard
     		a7105_read_rxdata(buf, RF_FRAME_LEN);
@@ -167,11 +183,11 @@ static void switch_pic()
 	uint8_t sector_index = 0;
 
 	random_table_index++;
-	random_table_index = random_table_index % 64;
+	random_table_index = random_table_index & 0x1F;
 
-	sector_index = random_table[sector_index];
+	sector_index = random_table[random_table_index];
 	// redundunt
-	sector_index = sector_index % 64;
+	sector_index = sector_index & 0x1F;
 
 
 	uint32_t addr = 4096 * sector_index;

@@ -32,6 +32,7 @@
 #define epdoff          P2OUT |= 0x40
 
 void epd_init();
+void epd_sleep();
 
 void epd_fill(unsigned char val);
 
