@@ -44,6 +44,10 @@ case RFCMD_FLASH_SECTOR_ERASE:
       handle_epd_load_from_flash(buf);
       break;
 
+      case RFCMD_SET_IMAGE_RAND_INDEX:
+      handle_set_image_rand_index(buf);
+      break;
+      
   	default:
   	break;
   }

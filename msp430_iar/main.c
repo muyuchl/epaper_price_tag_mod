@@ -16,7 +16,7 @@ uint8_t low_power_state = 0;
 
 // if idle more than this tick, enter low power mode
 const uint16_t INITIAL_IDLE_TICK_COUNT = 3;
-const uint16_t SWITCH_PIC_TICK_COUNT = 24*60;
+const uint16_t SWITCH_PIC_TICK_COUNT =  24*60;
 
 int count = 0;
 int crcErrCount = 0;
@@ -100,14 +100,13 @@ flash_init();
   			// switch picture
                         //epdon;
                         epd_init();
-                        
+                        delay_ms(100);
   			switch_pic();
-  			delay_ms(400);
-  			
+  			 			
   		}
-                delay_ms(1000);
+                
                 epd_sleep();
-                delay_ms(500);
+                delay_ms(1000);
                 epdoff;
   		LPM3;
 
@@ -116,9 +115,10 @@ flash_init();
 
   		if (tick >= INITIAL_IDLE_TICK_COUNT) {
                       tick = 0;	// reset to 0
-                        epd_init();                        
+                        epd_init();
+                        delay_ms(100);                        
   			switch_pic();
-                        delay_ms(1000);
+                        
   			// enter low power state
   			low_power_state = 1;
   			
@@ -205,5 +205,6 @@ for (int i = 0; i < 4000 / ONE_READ_SIZE; i++) {
 
  epd_post_update();
 
+delay_ms(10* 1000); 
 
 }

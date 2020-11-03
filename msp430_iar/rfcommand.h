@@ -44,12 +44,14 @@ enum {
     // 3 byte address (MSB first)
     RFCMD_LOAD_IMAGE_FROM_FLASH_RESP = 0x0D,
 
-    // 1 BYTE index data
-    RFCMD_SET_IMAGE_RAND_INDEX = 0x10,
-    RFCMD_SET_IMAGE_RAND_INDEX_RESP = 0x12,
+    
 
     RFCMD_FLASH_CHIP_ERASE = 0x14,
     RFCMD_FLASH_CHIP_ERASE_RESP = 0x15,
+
+    // 1 BYTE index data
+    RFCMD_SET_IMAGE_RAND_INDEX = 0x16,
+    RFCMD_SET_IMAGE_RAND_INDEX_RESP = 0x17,
 };
 
 void check_and_handle_rf_command();
