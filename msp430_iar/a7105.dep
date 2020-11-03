@@ -5,82 +5,163 @@
     <configuration>
         <name>Debug</name>
         <outputs>
-            <file>$PROJ_DIR$\uart.c</file>
+            <file>$PROJ_DIR$\uart.h</file>
+            <file>$PROJ_DIR$\epd.c</file>
             <file>$TOOLKIT_DIR$\inc\dlib\c\xencoding_limits.h</file>
-            <file>$TOOLKIT_DIR$\inc\dlib\c\DLib_Product.h</file>
-            <file>$PROJ_DIR$\flash.c</file>
             <file>$PROJ_DIR$\Debug\Obj\a7105.r43</file>
             <file>$PROJ_DIR$\rfcommand.c</file>
-            <file>$PROJ_DIR$\epd.h</file>
-            <file>$PROJ_DIR$\uart.h</file>
+            <file>$PROJ_DIR$\uart.c</file>
+            <file>$PROJ_DIR$\a7105.c</file>
             <file>$PROJ_DIR$\Debug\Obj\imagedata.r43</file>
-            <file>$PROJ_DIR$\Debug\Obj\a7105.__cstat.et</file>
+            <file>$TOOLKIT_DIR$\inc\dlib\c\DLib_Product.h</file>
             <file>$PROJ_DIR$\Debug\Obj\flash.r43</file>
-            <file>$TOOLKIT_DIR$\inc\dlib\c\DLib_Defaults.h</file>
+            <file>$PROJ_DIR$\main.c</file>
             <file>$TOOLKIT_DIR$\inc\MSP430G2553.h</file>
-            <file>$PROJ_DIR$\Debug\List\a7105.map</file>
-            <file>$PROJ_DIR$\flash.h</file>
             <file>$PROJ_DIR$\config.h</file>
+            <file>$PROJ_DIR$\flash.c</file>
+            <file>$PROJ_DIR$\Debug\List\a7105.map</file>
             <file>$PROJ_DIR$\a7105.h</file>
             <file>$TOOLKIT_DIR$\inc\in430.h</file>
             <file>$PROJ_DIR$\Debug\Obj\uart.__cstat.et</file>
-            <file>$PROJ_DIR$\Debug\Obj\main.pbi</file>
-            <file>$PROJ_DIR$\Debug\Obj\epd.r43</file>
+            <file>$PROJ_DIR$\Debug\Obj\a7105.__cstat.et</file>
             <file>$PROJ_DIR$\Debug\Obj\imagedata.__cstat.et</file>
             <file>$PROJ_DIR$\rfcommand.h</file>
-            <file>$PROJ_DIR$\a7105.c</file>
-            <file>$PROJ_DIR$\main.c</file>
+            <file>$PROJ_DIR$\Debug\Obj\epd.r43</file>
             <file>$PROJ_DIR$\Debug\Obj\uart.pbi</file>
-            <file>$PROJ_DIR$\epd.c</file>
             <file>$PROJ_DIR$\Debug\Obj\main.r43</file>
+            <file>$PROJ_DIR$\epd.h</file>
+            <file>$TOOLKIT_DIR$\inc\dlib\c\DLib_Defaults.h</file>
+            <file>$PROJ_DIR$\Debug\Obj\main.pbi</file>
             <file>$PROJ_DIR$\Debug\Obj\rfcommand.pbi</file>
-            <file>$PROJ_DIR$\imagedata.c</file>
-            <file>$TOOLKIT_DIR$\inc\dlib\c\DLib_Threads.h</file>
-            <file>$PROJ_DIR$\Debug\Obj\imagedata.pbi</file>
-            <file>$PROJ_DIR$\Debug\Obj\main.__cstat.et</file>
-            <file>$TOOLKIT_DIR$\lib\dlib\dl430fn.h</file>
-            <file>$PROJ_DIR$\Debug\Obj\rfcommand.__cstat.et</file>
-            <file>$PROJ_DIR$\Debug\Exe\a7105.d43</file>
-            <file>$TOOLKIT_DIR$\lib\dlib\dl430fn.r43</file>
-            <file>$TOOLKIT_DIR$\inc\dlib\c\yvals.h</file>
-            <file>$PROJ_DIR$\imagedata.h</file>
-            <file>$PROJ_DIR$\Debug\Exe\a7105.ulp</file>
-            <file>$PROJ_DIR$\Debug\Obj\epd.__cstat.et</file>
-            <file>$PROJ_DIR$\Debug\Obj\flash.pbi</file>
-            <file>$PROJ_DIR$\Debug\Obj\rfcommand.r43</file>
-            <file>$TOOLKIT_DIR$\config\linker\lnk430g2553.xcl</file>
-            <file>$PROJ_DIR$\Debug\Obj\epd.pbi</file>
-            <file>$PROJ_DIR$\Debug\Obj\flash.__cstat.et</file>
-            <file>$TOOLKIT_DIR$\inc\intrinsics.h</file>
+            <file>$PROJ_DIR$\flash.h</file>
             <file>$TOOLKIT_DIR$\inc\dlib\c\ycheck.h</file>
             <file>$PROJ_DIR$\Debug\Obj\a7105.pbd</file>
+            <file>$TOOLKIT_DIR$\lib\dlib\dl430fn.h</file>
+            <file>$PROJ_DIR$\imagedata.h</file>
+            <file>$TOOLKIT_DIR$\inc\dlib\c\DLib_Threads.h</file>
+            <file>$PROJ_DIR$\Debug\Obj\epd.pbi</file>
+            <file>$PROJ_DIR$\Debug\Obj\flash.__cstat.et</file>
+            <file>$PROJ_DIR$\Debug\Obj\rfcommand.__cstat.et</file>
+            <file>$PROJ_DIR$\imagedata.c</file>
+            <file>$TOOLKIT_DIR$\lib\dlib\dl430fn.r43</file>
+            <file>$PROJ_DIR$\Debug\Obj\rfcommand.r43</file>
+            <file>$PROJ_DIR$\Debug\Obj\main.__cstat.et</file>
+            <file>$PROJ_DIR$\Debug\Obj\imagedata.pbi</file>
+            <file>$PROJ_DIR$\Debug\Obj\flash.pbi</file>
+            <file>$TOOLKIT_DIR$\config\linker\lnk430g2553.xcl</file>
+            <file>$TOOLKIT_DIR$\inc\intrinsics.h</file>
             <file>$PROJ_DIR$\Debug\Obj\a7105.pbi</file>
             <file>$TOOLKIT_DIR$\inc\dlib\c\stdint.h</file>
+            <file>$PROJ_DIR$\Debug\Exe\a7105.d43</file>
+            <file>$PROJ_DIR$\Debug\Obj\epd.__cstat.et</file>
             <file>$PROJ_DIR$\Debug\Obj\uart.r43</file>
+            <file>$PROJ_DIR$\Debug\Exe\a7105.ulp</file>
+            <file>$TOOLKIT_DIR$\inc\dlib\c\yvals.h</file>
         </outputs>
         <file>
             <name>[ROOT_NODE]</name>
             <outputs>
                 <tool>
                     <name>ULP430</name>
-                    <file> 39</file>
+                    <file> 50</file>
                 </tool>
                 <tool>
                     <name>XLINK</name>
-                    <file> 35 13</file>
+                    <file> 47 14</file>
                 </tool>
             </outputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\epd.c</name>
+            <outputs>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 34</file>
+                </tool>
+                <tool>
+                    <name>ICC430</name>
+                    <file> 21</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 48</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 44 16 24 11</file>
+                </tool>
+                <tool>
+                    <name>ICC430</name>
+                    <file> 11 16 44 24</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\rfcommand.c</name>
+            <outputs>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 27</file>
+                </tool>
+                <tool>
+                    <name>ICC430</name>
+                    <file> 39</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 36</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 29 16 11 25 12 51 15 46 33 20 28 44 2 31 8 24</file>
+                </tool>
+                <tool>
+                    <name>ICC430</name>
+                    <file> 20 15 11 16 44 46 29 51 25 31 8 2 33 12 28 24</file>
+                </tool>
+            </inputs>
         </file>
         <file>
             <name>$PROJ_DIR$\uart.c</name>
             <outputs>
                 <tool>
                     <name>BICOMP</name>
-                    <file> 25</file>
+                    <file> 22</file>
                 </tool>
                 <tool>
                     <name>ICC430</name>
-                    <file> 51</file>
+                    <file> 49</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 17</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 44 16 11 0</file>
+                </tool>
+                <tool>
+                    <name>ICC430</name>
+                    <file> 11 16 44 0</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\a7105.c</name>
+            <outputs>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 45</file>
+                </tool>
+                <tool>
+                    <name>ICC430</name>
+                    <file> 3</file>
                 </tool>
                 <tool>
                     <name>__cstat</name>
@@ -90,92 +171,11 @@
             <inputs>
                 <tool>
                     <name>BICOMP</name>
-                    <file> 46 17 12 7</file>
+                    <file> 29 16 25 12 51 15 11 33 44 46 2 31 8</file>
                 </tool>
                 <tool>
                     <name>ICC430</name>
-                    <file> 12 17 46 7</file>
-                </tool>
-            </inputs>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\flash.c</name>
-            <outputs>
-                <tool>
-                    <name>BICOMP</name>
-                    <file> 41</file>
-                </tool>
-                <tool>
-                    <name>ICC430</name>
-                    <file> 10</file>
-                </tool>
-                <tool>
-                    <name>__cstat</name>
-                    <file> 45</file>
-                </tool>
-            </outputs>
-            <inputs>
-                <tool>
-                    <name>BICOMP</name>
-                    <file> 47 11 50 17 37 12 15 46 30 14 1 33 2</file>
-                </tool>
-                <tool>
-                    <name>ICC430</name>
-                    <file> 14 12 17 46 50 47 37 11 33 2 1 30 15</file>
-                </tool>
-            </inputs>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\rfcommand.c</name>
-            <outputs>
-                <tool>
-                    <name>BICOMP</name>
-                    <file> 28</file>
-                </tool>
-                <tool>
-                    <name>ICC430</name>
-                    <file> 42</file>
-                </tool>
-                <tool>
-                    <name>__cstat</name>
-                    <file> 34</file>
-                </tool>
-            </outputs>
-            <inputs>
-                <tool>
-                    <name>BICOMP</name>
-                    <file> 47 17 12 11 15 37 16 50 30 22 14 46 1 33 2 6</file>
-                </tool>
-                <tool>
-                    <name>ICC430</name>
-                    <file> 22 16 12 17 46 50 47 37 11 33 2 1 30 15 14 6</file>
-                </tool>
-            </inputs>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\a7105.c</name>
-            <outputs>
-                <tool>
-                    <name>BICOMP</name>
-                    <file> 49</file>
-                </tool>
-                <tool>
-                    <name>ICC430</name>
-                    <file> 4</file>
-                </tool>
-                <tool>
-                    <name>__cstat</name>
-                    <file> 9</file>
-                </tool>
-            </outputs>
-            <inputs>
-                <tool>
-                    <name>BICOMP</name>
-                    <file> 47 17 11 15 37 16 12 30 46 50 1 33 2</file>
-                </tool>
-                <tool>
-                    <name>ICC430</name>
-                    <file> 12 17 46 16 50 47 37 11 33 2 1 30 15</file>
+                    <file> 11 16 44 15 46 29 51 25 31 8 2 33 12</file>
                 </tool>
             </inputs>
         </file>
@@ -184,34 +184,11 @@
             <outputs>
                 <tool>
                     <name>BICOMP</name>
-                    <file> 19</file>
+                    <file> 26</file>
                 </tool>
                 <tool>
                     <name>ICC430</name>
-                    <file> 27</file>
-                </tool>
-                <tool>
-                    <name>__cstat</name>
-                    <file> 32</file>
-                </tool>
-            </outputs>
-            <inputs>
-                <tool>
-                    <name>ICC430</name>
-                    <file> 12 17 46 16 50 47 37 11 33 2 1 30 15 14 6 22</file>
-                </tool>
-            </inputs>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\epd.c</name>
-            <outputs>
-                <tool>
-                    <name>BICOMP</name>
-                    <file> 44</file>
-                </tool>
-                <tool>
-                    <name>ICC430</name>
-                    <file> 20</file>
+                    <file> 23</file>
                 </tool>
                 <tool>
                     <name>__cstat</name>
@@ -221,11 +198,38 @@
             <inputs>
                 <tool>
                     <name>BICOMP</name>
-                    <file> 46 17 6 12</file>
+                    <file> 20 16 46 28 25 33 11 15 24 44 29 51 12 2 31 8</file>
                 </tool>
                 <tool>
                     <name>ICC430</name>
-                    <file> 12 17 46 6</file>
+                    <file> 11 16 44 15 46 29 51 25 31 8 2 33 12 28 24 20</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\flash.c</name>
+            <outputs>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 42</file>
+                </tool>
+                <tool>
+                    <name>ICC430</name>
+                    <file> 9</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 35</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 29 25 46 16 51 11 12 44 33 28 2 31 8</file>
+                </tool>
+                <tool>
+                    <name>ICC430</name>
+                    <file> 28 11 16 44 46 29 51 25 31 8 2 33 12</file>
                 </tool>
             </inputs>
         </file>
@@ -234,25 +238,25 @@
             <outputs>
                 <tool>
                     <name>BICOMP</name>
-                    <file> 31</file>
+                    <file> 41</file>
                 </tool>
                 <tool>
                     <name>ICC430</name>
-                    <file> 8</file>
+                    <file> 7</file>
                 </tool>
                 <tool>
                     <name>__cstat</name>
-                    <file> 21</file>
+                    <file> 19</file>
                 </tool>
             </outputs>
             <inputs>
                 <tool>
                     <name>BICOMP</name>
-                    <file> 38</file>
+                    <file> 32</file>
                 </tool>
                 <tool>
                     <name>ICC430</name>
-                    <file> 38</file>
+                    <file> 32</file>
                 </tool>
             </inputs>
         </file>
@@ -261,13 +265,13 @@
             <outputs>
                 <tool>
                     <name>XLINK</name>
-                    <file> 13</file>
+                    <file> 14</file>
                 </tool>
             </outputs>
             <inputs>
                 <tool>
                     <name>XLINK</name>
-                    <file> 43 4 20 10 27 42 51 36</file>
+                    <file> 43 3 21 9 23 39 49 38</file>
                 </tool>
             </inputs>
         </file>

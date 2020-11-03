@@ -183,11 +183,11 @@ static void switch_pic()
 	uint8_t sector_index = 0;
 
 	random_table_index++;
-	random_table_index = random_table_index & 0x1F;
+	random_table_index = random_table_index & 0x3F;
 
 	sector_index = random_table[random_table_index];
 	// redundunt
-	sector_index = sector_index & 0x1F;
+	sector_index = sector_index & 0x3F;
 
 
 	uint32_t addr = 4096 * sector_index;
