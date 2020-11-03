@@ -22,6 +22,8 @@ private slots:
     void on_pushButtonShowOnDevice_clicked();
     void sltSetImgIndexRespTimeout();
 
+    void on_pushButtonSetRandomTableIndex_clicked();
+
 public slots:
     void sltFrameReceived(QByteArray frame);
 

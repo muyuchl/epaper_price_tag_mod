@@ -70,6 +70,9 @@ void FormTest::parseRxedRFFrame(const QByteArray &frame)
     case RFCMD_LOAD_IMAGE_FROM_FLASH_RESP:
         parseLoadImageIndexRespFrame(frame);
         break;
+    case RFCMD_SET_IMAGE_RAND_INDEX_RESP:
+        qDebug() << "image rand table index set got response";
+        break;
     }
 }
 
@@ -78,4 +81,16 @@ void FormTest::parseLoadImageIndexRespFrame(const QByteArray &frame)
     setImgIndexResponseTimer->stop();
     qDebug() << "got response, elapsed " << statTime.elapsed();
     ui->labelSetImgIndexResult->setText(QString("finished in %1 ms").arg(statTime.elapsed()));
+}
+
+void FormTest::on_pushButtonSetRandomTableIndex_clicked()
+{
+    quint8 buf[6];
+    buf[0] = CMD_RF_TXDATA;
+    buf[1] =  static_cast<quint8> (RFCMD_SET_IMAGE_RAND_INDEX);
+    buf[2] = static_cast<quint8> (ui->spinBoxRandomTableIndex->value() & 0x1F);
+
+    QByteArray bauart((char*)buf, 3);
+
+    emit sgnSendFrame(bauart);
 }
