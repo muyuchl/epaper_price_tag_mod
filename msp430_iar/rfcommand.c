@@ -5,7 +5,7 @@
 
 const int ONE_READ_SIZE = 16;
 
-extern uint8_t random_table_index;
+extern uint8_t next_pic_index;
 
 void check_and_handle_rf_command()
 {
@@ -161,11 +161,14 @@ a7105_tx_data(buf, RF_FRAME_LEN);
 
 }
 
+/* note: 2020-11-19, this will set next picture index,
+but the function name is still rand index, no good IDE to refactor on Windows */
 void handle_set_image_rand_index(unsigned char *buf)
 {
   buf[0] = RFCMD_SET_IMAGE_RAND_INDEX_RESP;
 
-  random_table_index = buf[1];
+  next_pic_index = buf[1];
+  next_pic_index = next_pic_index & 0x3F;
 
   a7105_tx_data(buf, RF_FRAME_LEN); 
 }

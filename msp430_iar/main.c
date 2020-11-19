@@ -15,7 +15,7 @@ volatile uint16_t tick = 0;
 uint8_t low_power_state = 0;
 
 // if idle more than this tick, enter low power mode
-const uint16_t INITIAL_IDLE_TICK_COUNT = 3;
+const uint16_t INITIAL_IDLE_TICK_COUNT =  3;
 const uint16_t SWITCH_PIC_TICK_COUNT =  24*60;
 
 int count = 0;
@@ -27,13 +27,7 @@ uint8_t write_flash_buf[8];
 
 uint8_t buf[RF_FRAME_LEN];
 
-const uint8_t random_table[64] = {
-	11, 34, 47, 61, 39, 12, 37, 19, 32, 42, 48, 3, 60, 21, 22, 16, 62, 17, 38, 8, 57, 18, 
-    25, 9, 23, 59, 29, 15, 56, 44, 40, 1, 63, 35, 27, 30, 2, 51, 33, 28, 58, 5, 14, 49,
-     50, 54, 0, 46, 4, 26, 41, 53, 45, 20, 13, 6, 52, 10, 36, 31, 43, 24, 55, 7
- };
-
- uint8_t random_table_index = 0;
+uint8_t next_pic_index = 0;
 
 void delay_ms(int count)
 {
@@ -161,7 +155,7 @@ if (a7105_gio2_low() ) {
     		tick = 0;
     	} else {
     		crcErrCount++;
-                random_table_index++;
+              
     		delay_ms(100);
     		// read to discard
     		a7105_read_rxdata(buf, RF_FRAME_LEN);
@@ -180,18 +174,11 @@ static void switch_pic()
 {
 	const uint16_t ONE_READ_SIZE = 16;
 
-	uint8_t sector_index = 0;
-
-	random_table_index++;
-	random_table_index = random_table_index & 0x3F;
-
-	sector_index = random_table[random_table_index];
-	// redundunt
-	sector_index = sector_index & 0x3F;
-
-
+	uint8_t sector_index = next_pic_index;
+	next_pic_index++;
+	next_pic_index = next_pic_index & 0x3F;	// [0,63]
+	
 	uint32_t addr = 4096 * sector_index;
-
 
 uint8_t img_buf[16];
 
