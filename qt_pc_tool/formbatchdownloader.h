@@ -43,9 +43,14 @@ private slots:
 
     void on_tableWidget_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn);
 
+    void on_pushButtonMoveUp_clicked();
+
+    void on_pushButtonMoveDown_clicked();
+
 private:
     void initTableWidget();
     void populateTableWidget();
+    void swapFile(int indexA, int indexB, int hightLightIndex);
 
 private:
     Ui::FormBatchDownloader *ui;

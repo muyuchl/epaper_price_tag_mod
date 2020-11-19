@@ -83,6 +83,27 @@ void FormBatchDownloader::populateTableWidget()
     }
 }
 
+void FormBatchDownloader::swapFile(int indexA, int indexB, int hightLightIndex)
+{
+    // swap with previous item
+    QString fileNameA = filesToDownload.at(indexA);
+    filesToDownload.replace(indexA, filesToDownload[indexB]);
+    filesToDownload.replace(indexB, fileNameA);
+    // update table widget
+
+    QTableWidgetItem *itemA = ui->tableWidget->item(indexA, COL_FILENAME);
+    QTableWidgetItem *itemB = ui->tableWidget->item(indexB, COL_FILENAME);
+    if (!itemA || !itemB) {
+        return;
+    }
+
+    QString textA = itemA->text();
+    itemA->setText(itemB->text());
+    itemB->setText(textA);
+
+    ui->tableWidget->selectRow(hightLightIndex);
+}
+
 void FormBatchDownloader::on_pushButtonBrowse_clicked()
 {
     QStringList files = QFileDialog::getOpenFileNames(
@@ -199,5 +220,25 @@ void FormBatchDownloader::on_tableWidget_currentCellChanged(int currentRow, int 
 
     } else {
         ui->labelPreview->setText("Invalid Index");
+    }
+}
+
+void FormBatchDownloader::on_pushButtonMoveUp_clicked()
+{
+    int curRow = ui->tableWidget->currentRow();
+    if (curRow > 0
+            && curRow < filesToDownload.size()) {
+
+        swapFile(curRow-1, curRow, curRow-1);
+    }
+}
+
+void FormBatchDownloader::on_pushButtonMoveDown_clicked()
+{
+    int curRow = ui->tableWidget->currentRow();
+    if (curRow > 0
+            && curRow < filesToDownload.size() - 1) {
+
+        swapFile(curRow, curRow+1, curRow+1);
     }
 }
