@@ -6,6 +6,8 @@
 #include "batchdownloader.h"
 #include <QDebug>
 #include <QFile>
+#include <QTextStream>
+#include <QDateTime>
 #include "monoimagelabel.h"
 
 const int MAX_PICTURES = 64;
@@ -118,6 +120,23 @@ void FormBatchDownloader::sltFailed()
 void FormBatchDownloader::sltAllDone()
 {
     ui->labelStatus->setText("all done");
+
+    QFile downloadLogFile("batchdownload.log");
+    if (downloadLogFile.open(QIODevice::WriteOnly | QIODevice::Append)) {
+        QTextStream ts(&downloadLogFile);
+
+        QString strTime = QDateTime::currentDateTime().toString("yyyy-MM-dd HH:mm:ss");
+        QString strLog = QString("%1 startIndex: %2")
+                .arg(strTime)
+                .arg(ui->spinBoxFirstIndex->value());
+
+        ts << strLog << "\n";
+        for (int i = 0; i < filesToDownload.size(); i++) {
+            QString strLog = QString("%1 %2").arg(i).arg(filesToDownload[i]);
+            ts << strLog << "\n";
+        }
+
+    }
 }
 
 void FormBatchDownloader::sltProgressChange(int fileIndex, int progress)
@@ -160,6 +179,7 @@ void FormBatchDownloader::on_pushButtonShuffle_clicked()
     }
 
     populateTableWidget();
+
 }
 
 void FormBatchDownloader::on_tableWidget_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn)
@@ -176,7 +196,6 @@ void FormBatchDownloader::on_tableWidget_currentCellChanged(int currentRow, int 
                     QByteArray ba = binFile.readAll();
                     ui->labelPreview->setEpaperBinData(ba);
                 }
-
 
     } else {
         ui->labelPreview->setText("Invalid Index");
