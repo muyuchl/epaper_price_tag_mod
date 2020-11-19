@@ -4,6 +4,9 @@
 #include <QFileDialog>
 #include <QMessageBox>
 #include "batchdownloader.h"
+#include <QDebug>
+#include <QFile>
+#include "monoimagelabel.h"
 
 const int MAX_PICTURES = 64;
 
@@ -157,4 +160,25 @@ void FormBatchDownloader::on_pushButtonShuffle_clicked()
     }
 
     populateTableWidget();
+}
+
+void FormBatchDownloader::on_tableWidget_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn)
+{
+    qDebug() << __PRETTY_FUNCTION__ << " currentRow:" << currentRow;
+    if (currentRow >= 0
+            && currentRow < filesToDownload.size()) {
+
+        QFile binFile(filesToDownload[currentRow]);
+                if (!binFile.open(QIODevice::ReadOnly)) {
+                   ui->labelPreview->setText("File Open Failed");
+                    return;
+                } else {
+                    QByteArray ba = binFile.readAll();
+                    ui->labelPreview->setEpaperBinData(ba);
+                }
+
+
+    } else {
+        ui->labelPreview->setText("Invalid Index");
+    }
 }

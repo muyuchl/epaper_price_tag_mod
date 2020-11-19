@@ -41,6 +41,8 @@ private slots:
 
     void on_pushButtonShuffle_clicked();
 
+    void on_tableWidget_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn);
+
 private:
     void initTableWidget();
     void populateTableWidget();

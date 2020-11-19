@@ -92,7 +92,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QLabel" name="labelPreview">
+      <widget class="MonoImageLabel" name="labelPreview">
        <property name="minimumSize">
         <size>
          <width>260</width>
@@ -115,6 +115,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>MonoImageLabel</class>
+   <extends>QLabel</extends>
+   <header location="global">monoimagelabel.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>
