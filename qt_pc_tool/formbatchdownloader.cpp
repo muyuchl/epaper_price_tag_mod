@@ -50,8 +50,32 @@ void FormBatchDownloader::initTableWidget()
     headerLabels << "Status";
     ui->tableWidget->setColumnWidth(COL_FILENAME, 200);
 
-
     ui->tableWidget->setHorizontalHeaderLabels(headerLabels);
+}
+
+void FormBatchDownloader::populateTableWidget()
+{
+    int firstIndex = ui->spinBoxFirstIndex->value();
+
+    ui->tableWidget->setRowCount(filesToDownload.size());
+
+    int row = 0;
+    for (auto f : filesToDownload) {
+        QTableWidgetItem *newItem = new QTableWidgetItem(tr("%1").arg(firstIndex + row));
+        ui->tableWidget->setItem(row, COL_PICTURE_INDEX, newItem);
+
+        QFileInfo fi(f);
+        QString base = fi.completeBaseName();
+
+        newItem = new QTableWidgetItem(tr("%1").arg(base));
+        ui->tableWidget->setItem(row, COL_FILENAME, newItem);
+
+        QString text = "0";
+        newItem = new QTableWidgetItem(tr("%1").arg(text));
+        ui->tableWidget->setItem(row, COL_PROGRESS, newItem);
+
+        row++;
+    }
 }
 
 void FormBatchDownloader::on_pushButtonBrowse_clicked()
@@ -59,7 +83,7 @@ void FormBatchDownloader::on_pushButtonBrowse_clicked()
     QStringList files = QFileDialog::getOpenFileNames(
                 this,
                 "Select one or more files to open",
-                "/tmp/tmpchl",
+                "",
                 "Bin (*.bin);;All files (*.*)");
 
     int firstIndex = ui->spinBoxFirstIndex->value();
@@ -79,27 +103,7 @@ void FormBatchDownloader::on_pushButtonBrowse_clicked()
     }
 
     filesToDownload = files;
-
-    ui->tableWidget->setRowCount(filesToDownload.size());
-
-
-    int row = 0;
-    for (auto f : filesToDownload) {
-        QTableWidgetItem *newItem = new QTableWidgetItem(tr("%1").arg(firstIndex + row));
-        ui->tableWidget->setItem(row, COL_PICTURE_INDEX, newItem);
-
-        QFileInfo fi(f);
-        QString base = fi.completeBaseName();
-
-        newItem = new QTableWidgetItem(tr("%1").arg(base));
-        ui->tableWidget->setItem(row, COL_FILENAME, newItem);
-
-        QString text = "0";
-        newItem = new QTableWidgetItem(tr("%1").arg(text));
-        ui->tableWidget->setItem(row, COL_PROGRESS, newItem);
-
-        row++;
-    }
+    populateTableWidget();
 
 }
 
@@ -132,4 +136,25 @@ void FormBatchDownloader::on_pushButtonStart_clicked()
 void FormBatchDownloader::on_pushButtonStop_clicked()
 {
     batchDownloader->stop();
+}
+
+void FormBatchDownloader::on_pushButtonShuffle_clicked()
+{
+    qsrand(::time(0));
+
+    int count = filesToDownload.size();
+
+    for (int i = 0; i < count; i++) {
+        int indexB = qrand() % count;
+        if (indexB != i) {
+            // swap index i and indexB
+            QString strI = filesToDownload.at(i);
+            QString strB = filesToDownload.at(indexB);
+
+            filesToDownload.replace(indexB, strI);
+            filesToDownload.replace(i, strB);
+        }
+    }
+
+    populateTableWidget();
 }

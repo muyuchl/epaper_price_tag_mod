@@ -39,8 +39,11 @@ private slots:
 
     void on_pushButtonStop_clicked();
 
+    void on_pushButtonShuffle_clicked();
+
 private:
     void initTableWidget();
+    void populateTableWidget();
 
 private:
     Ui::FormBatchDownloader *ui;

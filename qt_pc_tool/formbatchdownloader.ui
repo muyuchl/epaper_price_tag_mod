@@ -24,6 +24,13 @@
       </widget>
      </item>
      <item>
+      <widget class="QPushButton" name="pushButtonShuffle">
+       <property name="text">
+        <string>Shuffle</string>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QPushButton" name="pushButtonStart">
        <property name="text">
         <string>Start</string>
