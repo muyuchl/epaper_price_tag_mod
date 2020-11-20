@@ -13,8 +13,8 @@ volatile uint16_t tick = 0;
 uint8_t low_power_state = 0;
 
 // if idle more than this tick, enter low power mode
-const uint16_t INITIAL_IDLE_TICK_COUNT =  3;
-const uint16_t SWITCH_PIC_TICK_COUNT =  24*60;
+const uint16_t INITIAL_IDLE_TICK_COUNT = 2;// 3;
+const uint16_t SWITCH_PIC_TICK_COUNT =  2; //24*60;
 
 int count = 0;
 int crcErrCount = 0;
@@ -110,10 +110,9 @@ uart_send_str("\r\n");
                 // enter low power state
                 low_power_state = 1;
 
-
                 //  turning off the a7105 chip
                 a7105_deinit();
-                
+                flash_deinit();                
 
             }
         }
@@ -175,6 +174,9 @@ static void switch_pic()
 
     uint8_t img_buf[16];
 
+    // flash pins may set to input when sleep, need to reinitialize
+    flash_init();    
+
     epd_pre_update();
 
     for (int i = 0; i < 4000 / ONE_READ_SIZE; i++) {
@@ -185,6 +187,7 @@ static void switch_pic()
 
     epd_post_update();
 
+    flash_deinit();
     delay_ms(10* 1000);
 
 }

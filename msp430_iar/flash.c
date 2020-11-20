@@ -87,6 +87,25 @@ void flash_init()
 	delay_us(10);
 }
 
+void flash_deinit()
+{
+
+#ifdef PRICETAG_DEVICE
+	// input mode
+	P1DIR &= ~(BIT5  + BIT7);
+	P3DIR &= ~BIT0;
+	// input
+	P1DIR &= ~BIT6;
+
+#else
+	// input mode
+	P2DIR &= ~(BIT2 + BIT3 + BIT4);
+	// input
+	P2DIR &= ~BIT0;
+#endif
+
+}
+
 void flash_send_byte(unsigned char data)
 {
 // mode 0

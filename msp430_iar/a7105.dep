@@ -132,7 +132,7 @@
             <inputs>
                 <tool>
                     <name>BICOMP</name>
-                    <file> 17 27 15 39 12 29 49 18 20 44 40 8 33</file>
+                    <file> 8 49 39 12 17 40 15 29 33 44 18 27 20</file>
                 </tool>
                 <tool>
                     <name>ICC430</name>
@@ -186,7 +186,7 @@
             <inputs>
                 <tool>
                     <name>BICOMP</name>
-                    <file> 34 39 15 44 27 20 29 50 45 18 17 12 49 40 8 33</file>
+                    <file> 34 39 49 44 33 17 15 50 45 29 12 40 8 18 27 20</file>
                 </tool>
                 <tool>
                     <name>ICC430</name>

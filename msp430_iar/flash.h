@@ -15,6 +15,7 @@
 
 
 void flash_init();
+void flash_deinit();
 
 
 void flash_send_byte(unsigned char data);
