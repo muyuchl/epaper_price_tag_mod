@@ -43,7 +43,7 @@ void epd_init()
   epdon;
   
  
-  P2DIR |= BIT3 | BIT4 | BIT5 | BIT6 ;
+  P2DIR |= BIT3 | BIT4 | BIT6 ;
   P3DIR |=  BIT1 | BIT4 | BIT5 | BIT6 | BIT7 ;
   
 
@@ -96,7 +96,8 @@ void epd_deinit()
   epdoff;
 
   // reset pin direction to input
-    P2DIR &= ~(BIT3 | BIT4 | BIT5 | BIT6 );
+  // p2.5 is busy pin
+    P2DIR &= ~(BIT3 | BIT4 | BIT6 );
     P3DIR &= ~(BIT1 | BIT4 | BIT5 | BIT6 | BIT7 );
 }
  
