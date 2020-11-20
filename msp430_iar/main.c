@@ -7,9 +7,7 @@
 #include "rfcommand.h"
 #include <stdint.h>
 
-// p2.7 
-#define rfon               P2OUT &= 0x7f
-#define rfoff              P2OUT |= 0x80
+
 
 volatile uint16_t tick = 0;
 uint8_t low_power_state = 0;
@@ -72,11 +70,7 @@ uart_send_str("\r\n");
     delay_ms(40);
     epd_init();
 
-    // rf on off pin
-    P2DIR |= BIT7;
-
-    rfon;
-    delay_ms(400);
+    
 
     a7105_init();
     a7105_toRxMode();
@@ -117,10 +111,9 @@ uart_send_str("\r\n");
                 low_power_state = 1;
 
 
-                // not necessary, we are turning off the chip
-                a7105_sleep();
-                // turn off rf
-                rfoff;
+                //  turning off the a7105 chip
+                a7105_deinit();
+                
 
             }
         }

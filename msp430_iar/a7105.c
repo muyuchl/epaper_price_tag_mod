@@ -1,6 +1,14 @@
 #include <MSP430G2553.h>
 #include "a7105.h"
 
+
+#define RF_MOS_PIN BIT7
+
+// p2.7 
+// set low will turn on MOS
+#define rfon               P2OUT &= ~RF_MOS_PIN
+#define rfoff              P2OUT |= RF_MOS_PIN
+
 const unsigned char id_table[4] = {0x11, 0x22, 0x33, 0x44};
 
 const uint8_t RF_CHANNEL = 20;
@@ -15,6 +23,16 @@ static void delay_us( unsigned int k )
     }
 }
 
+static void delay_ms(int count)
+{
+    for (int i = 0; i < count; i++)
+    {
+        for (int j = 0; j < 160; j++)
+            _NOP();
+    }
+}
+
+
 static void WaitBit_0(uint8_t reg, uint8_t nbit)
 {
 	while (a7105_read_reg(reg) & nbit)
@@ -26,6 +44,11 @@ static const uint8_t   A7105Config[51];
 
 void a7105_init()
 {
+	// rf on off pin, output mode
+    P2DIR |= RF_MOS_PIN;
+
+    rfon;
+    delay_ms(400);
 
     // spi ncs
     SCS_H;
@@ -71,9 +94,28 @@ void a7105_init()
 	delay_us(1); 
 }
 
-void a7105_sleep()
+void a7105_deinit()
 {
     a7105_strobe_cmd(CMD_SLEEP);
+    delay_us(10); 
+
+    rfoff;
+
+    // reset pins     
+    Clr_Bit(SCS_DIR, SCS_PIN);	// input mode
+    Clr_Bit(SCS_REN, SCS_PIN);	// no pullup
+
+    Clr_Bit(SCLK_DIR, SCLK_PIN);	// input mode
+    Clr_Bit(SCLK_REN, SCLK_PIN);	// no pullup
+
+    Clr_Bit(SDIO_DIR, SDIO_PIN);	// input mode
+    Clr_Bit(SDIO_REN, SDIO_PIN);	// no pullup
+
+    Clr_Bit(GIO1_DIR, GIO1_PIN);	// input mode
+    Clr_Bit(GIO1_REN, GIO1_PIN);	// no pullup
+
+    Clr_Bit(GIO2_DIR, GIO2_PIN);	// input mode
+    Clr_Bit(GIO2_REN, GIO2_PIN);	// no pullup
 }
 
 void a7105_reset()

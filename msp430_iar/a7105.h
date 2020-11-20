@@ -157,7 +157,7 @@
 
 
 void a7105_init();
-void a7105_sleep();
+void a7105_deinit();
 
 void a7105_reset();
 
