@@ -68,9 +68,7 @@ uart_send_str("\r\n");
 */
 
     delay_ms(40);
-    epd_init();
-
-    
+   
 
     a7105_init();
     a7105_toRxMode();
@@ -85,17 +83,11 @@ uart_send_str("\r\n");
         if (low_power_state) {
             if (tick >= SWITCH_PIC_TICK_COUNT) {
                 tick = 0; // reset to 0
-                // switch picture
-                //epdon;
-                epd_init();
-                delay_ms(100);
+                // switch picture 
                 switch_pic();
 
             }
-
-            epd_sleep();
-            delay_ms(1000);
-            epdoff;
+            
             LPM3;
 
         } else {
@@ -103,8 +95,7 @@ uart_send_str("\r\n");
 
             if (tick >= INITIAL_IDLE_TICK_COUNT) {
                 tick = 0;	// reset to 0
-                epd_init();
-                delay_ms(100);
+               
                 switch_pic();
 
                 // enter low power state
@@ -174,6 +165,8 @@ static void switch_pic()
 
     uint8_t img_buf[16];
 
+    epd_init();
+    delay_ms(100);
     // flash pins may set to input when sleep, need to reinitialize
     flash_init();    
 
@@ -190,4 +183,6 @@ static void switch_pic()
     flash_deinit();
     delay_ms(10* 1000);
 
+    epd_deinit();
+    delay_ms(100);
 }

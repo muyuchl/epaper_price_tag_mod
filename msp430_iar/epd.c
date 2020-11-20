@@ -36,11 +36,13 @@ static void fill_predefinedimage()
 void epd_init()
 {
 
+  // is it ok? we have not set the direction yet
+  // this piece code is from forum
   epdunknowhigh;
   epdbslow ;  
   epdon;
   
-  // P1DIR = P2 | P3 | P4 | P6 | P7 ;
+ 
   P2DIR |= BIT3 | BIT4 | BIT5 | BIT6 ;
   P3DIR |=  BIT1 | BIT4 | BIT5 | BIT6 | BIT7 ;
   
@@ -86,9 +88,16 @@ void epd_init()
     //     fill_predefinedimage();
 }
 
-void epd_sleep()
+void epd_deinit()
 {
-epd_sendcmddata(0x10,0x01);  
+  epd_sendcmddata(0x10,0x01);  
+  Delay(10);
+
+  epdoff;
+
+  // reset pin direction to input
+    P2DIR &= ~(BIT3 | BIT4 | BIT5 | BIT6 );
+    P3DIR &= ~(BIT1 | BIT4 | BIT5 | BIT6 | BIT7 );
 }
  
 

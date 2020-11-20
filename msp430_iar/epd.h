@@ -9,6 +9,8 @@
 #define epddalow           P2OUT &= 0xef
 #define epddahigh          P2OUT |= 0x10
 
+// p2.5 busy
+
 // p3.4
 #define epdcslow           P3OUT &= 0xef
 #define epdcshigh          P3OUT |= 0x10
@@ -32,7 +34,7 @@
 #define epdoff          P2OUT |= 0x40
 
 void epd_init();
-void epd_sleep();
+void epd_deinit();
 
 void epd_fill(unsigned char val);
 
