@@ -13,8 +13,8 @@ volatile uint16_t tick = 0;
 uint8_t low_power_state = 0;
 
 // if idle more than this tick, enter low power mode
-const uint16_t INITIAL_IDLE_TICK_COUNT = 2;// 3;
-const uint16_t SWITCH_PIC_TICK_COUNT =  2; //24*60;
+const uint16_t INITIAL_IDLE_TICK_COUNT =  3;
+const uint16_t SWITCH_PIC_TICK_COUNT =  23*60;
 
 int count = 0;
 int crcErrCount = 0;
