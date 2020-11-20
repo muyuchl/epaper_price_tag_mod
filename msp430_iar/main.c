@@ -69,10 +69,12 @@ uart_send_str("\r\n");
 
     delay_ms(40);
    
-
     a7105_init();
     a7105_toRxMode();
     flash_init();
+    
+    epd_init();
+    delay_ms(100);
 
     __bis_SR_register( GIE); //  interrupts enabled
 
